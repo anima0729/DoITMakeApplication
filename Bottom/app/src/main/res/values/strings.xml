@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Bottom_Setting</string>
+    <string name="Home">홈</string>
+    <string name="List">목록</string>
+    <string name="History">기록</string>
+    <string name="Statistics">통계</string>
+    <string name="Another">더보기</string>
+    <string name="profile">닉네임 / 나이</string>
+    <string name="User">  사용자</string>
+    <string name="Account">계정</string>
+    <string name="Export">내보내기</string>
+    <string name="Logout">로그아웃</string>
+    <string name="System">  시스템</string>
+    <string name="Notification">알림</string>
+    <string name="Language">언어</string>
+    <string name="Theme_and_Skin">테마 및 스킨</string>
+    <string name="Developer">  개발자</string>
+    <string name="Feedback">피드백</string>
+    <string name="Developers">개발자들</string>
+    <string name="Notice">공지</string>
+    <string name="Version">버전 : 1.00 ver</string>
+    <string name="KangDongHwa">강동화 : Another, Statistics, Notice Database(PHP) 구현</string>
+    <string name="KimSunHee">김선희 : List, Naver Login(Naver-API) 구현</string>
+    <string name="JeongInHwa">정인화 : List Select Goal, Google Login(Firebase) 구현</string>
+    <string name="JeongHwangil">정환길 : Database(MySQL), List More 구현</string>
+    <string name="school">소속 : 인천대학교 컴퓨터공학부</string>
+
+    <!--Another View Contents-->
+    <string name="BasicTheme">기본 테마</string>
+    <string name="YellowTheme">노란색 테마</string>
+    <string name="BrownTheme">갈색 테마</string>
+    <string name="DarkTheme">어두운 테마</string>
+    <string name="List_Notice">"          공지"</string>
+    <string name="List_Language">"          언어"</string>
+    <string name="List_Sound">"          알림 및 음향"</string>
+    <string name="List_Theme">"          테마"</string>
+    <string name="List_Account">"          계정"</string>
+    <string name="List_Logout">"          로그아웃"</string>
+    <string name="List_Export">"          내보내기"</string>
+    <string name="List_Developer">"          개발자"</string>
+    <string name="List_Version">"          버전"</string>
+    <string name="List_Feedback">"          피드백 및 평점"</string>
+    <string name="Notification_Sound">  소리</string>
+    <string name="Notification_Push">  푸시 알림</string>
+    <string name="Notification_Notification">  알림</string>
+    <string name="SelectLanguage">언어를 선택하세요.</string>
+    <string name="Select">선택</string>
+    <string name="SelectTheme">테마를 선택하세요.</string>
+
+    <!--SelectGoal View Contents-->
+    <string name="InputGoal">목표를 입력하세요.</string>
+    <string name="StartDate">시작 기간</string>
+    <string name="EndDate">끝나는 기간</string>
+    <string name="TimeSetting">시간 설정</string>
+    <string name="StartTime">시작 시간</string>
+    <string name="EndTime">끝나는 시간</string>
+    <string name="CategorySetting">카테고리 설정</string>
+    <string name="Save">저장</string>
+    <string name="Cancel">취소</string>
+
+</resources>

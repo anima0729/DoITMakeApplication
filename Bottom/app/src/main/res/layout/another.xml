@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="780dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:src="#000000" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="80dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_toRightOf="@+id/imageView"
+            android:text="@string/profile" />
+
+        <fragment
+            android:id="@+id/User"
+            android:name="com.cookandroid.bottom_setting.Another_User"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="140dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="4dp"
+            android:textSize="15pt">
+
+        </fragment>
+
+        <fragment
+            android:id="@+id/System"
+            android:name="com.cookandroid.bottom_setting.Another_System"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_below="@+id/User"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="4dp"
+            android:textSize="15pt" />
+
+        <fragment
+            android:id="@+id/Developer"
+            android:name="com.cookandroid.bottom_setting.Another_Developer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/System"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="4dp"
+            android:textSize="15pt" />
+    </RelativeLayout>
+</ScrollView>

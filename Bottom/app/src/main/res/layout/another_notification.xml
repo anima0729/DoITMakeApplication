@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Another_Notification">
+
+    <ListView
+        android:id="@+id/Notification_01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:textSize="15pt">
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/Notification_02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Notification_01"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:textSize="15pt" />
+
+</RelativeLayout>

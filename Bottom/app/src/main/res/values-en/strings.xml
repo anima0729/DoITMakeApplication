@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bottom_Setting</string>
+    <string name="Home">Home</string>
+    <string name="List">List</string>
+    <string name="History">History</string>
+    <string name="Statistics">Statistics</string>
+    <string name="Another">Another</string>
+    <string name="profile">Nickname / Age</string>
+    <string name="User">  User</string>
+    <string name="Account">Account</string>
+    <string name="Export">Export</string>
+    <string name="Logout">Logout</string>
+    <string name="System">  System</string>
+    <string name="Notification">Notification</string>
+    <string name="Language">Language</string>
+    <string name="Theme_and_Skin">Theme and Skin</string>
+    <string name="Developer">  Developer</string>
+    <string name="Feedback">Feedback</string>
+    <string name="Developers">Developers</string>
+    <string name="Notice">Notice</string>
+    <string name="Version">Version : 1.00 ver</string>
+    <string name="KangDongHwa">KangDongHwa : Another, Statistics, Notice Database(PHP)</string>
+    <string name="KimSunHee">KimSunHee : List, Naver Login(Naver-API)</string>
+    <string name="JeongInHwa">JeongInHwa : List Select Goal, Google Login(Firebase)</string>
+    <string name="JeongHwangil">JeongHwangil : Database(MySQL), List More</string>
+    <string name="school">University : InCheon National University Computer Science Department</string>
+
+    <!--Another View Contents-->
+    <string name="BasicTheme">Basic Theme</string>
+    <string name="YellowTheme">Yellow Theme</string>
+    <string name="BrownTheme">Brown Theme</string>
+    <string name="DarkTheme">Dark Theme</string>
+    <string name="List_Notice">"          Notice"</string>
+    <string name="List_Language">"          Language"</string>
+    <string name="List_Sound">"          Sound"</string>
+    <string name="List_Theme">"          Theme"</string>
+    <string name="List_Account">"          Account"</string>
+    <string name="List_Logout">"          Logout"</string>
+    <string name="List_Export">"          Export"</string>
+    <string name="List_Developer">"          Developer"</string>
+    <string name="List_Version">"          Version"</string>
+    <string name="List_Feedback">"          Feedback"</string>
+    <string name="Notification_Sound">  Sound</string>
+    <string name="Notification_Push">  PUSH Alarm</string>
+    <string name="Notification_Notification">  Notofication</string>
+    <string name="SelectLanguage">Select Language</string>
+    <string name="Select">Select </string>
+    <string name="SelectTheme">Select Theme</string>
+
+    <!--SelectGoal View Contents-->
+    <string name="InputGoal">Write Your Goal.</string>
+    <string name="StartDate">Start Date</string>
+    <string name="EndDate">End Date</string>
+    <string name="TimeSetting">TimeSetting</string>
+    <string name="StartTime">Start Time</string>
+    <string name="EndTime">End Time</string>
+    <string name="CategorySetting">Select Category</string>
+    <string name="Save">SAVE</string>
+    <string name="Cancel">CANCEL</string>
+
+
+</resources>

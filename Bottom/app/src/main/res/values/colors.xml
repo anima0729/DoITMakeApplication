@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_theme">#6200EE</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="notificationBrownColorBar">#9d5107</color>
+    <color name="notificationBrownColorBarDark">#5E3711</color>
+    <color name="notificationBrownAccentColor">#000000</color>
+
+    <color name="notificationYellowColorBar">#FFEB3B</color>
+    <color name="notificationYellowColorBarDark">#DCD490</color>
+    <color name="notificationYellowAccentColor">#FF3D00</color>
+
+    <color name="DarkColorBar">#D7272525</color>
+    <color name="DarkColorBarDark">#454331</color>
+    <color name="DarkAccentColor">#191818</color>
+    <color name="DarkBackground">#000000</color>
+</resources>
