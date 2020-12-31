@@ -1,2 +1,2 @@
 # DoITMakeApplication
-INU Computer Science Department Make a Application Project
+Make a Application Project By INU Computer Science Department 
