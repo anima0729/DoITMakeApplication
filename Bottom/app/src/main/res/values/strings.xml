@@ -20,7 +20,7 @@
     <string name="Notice">공지</string>
     <string name="Version">버전 : 1.00 ver</string>
     <string name="KangDongHwa">강동화 : Another, Statistics, Notice Database(PHP) 구현</string>
-    <string name="KimSunHee">김선희 : List, Naver Login(Naver-API) 구현</string>
+    <string name="KimSunHee">김선희 : List, History, Naver Login(Naver-API) 구현</string>
     <string name="JeongInHwa">정인화 : List Select Goal, Google Login(Firebase) 구현</string>
     <string name="JeongHwangil">정환길 : Database(MySQL), List More 구현</string>
     <string name="school">소속 : 인천대학교 컴퓨터공학부</string>
