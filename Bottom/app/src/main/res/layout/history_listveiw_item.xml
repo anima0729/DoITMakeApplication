@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/corner_shape_listview_item" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,7 +12,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -72,26 +74,30 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="140dp"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/building"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/isDone"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_weight="1" />
-
-
-        </LinearLayout>
+                android:layout_weight="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
