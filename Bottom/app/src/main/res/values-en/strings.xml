@@ -60,4 +60,9 @@
     <string name="Cancel">CANCEL</string>
 
 
+    <string name="naver_client_id">S1lQJB5lwu6g49kxQ6FE</string>
+    <string name="naver_client_secret">GsDryj6kDC</string>
+    <string name="naver_client_name">Project</string>
+
+
 </resources>
