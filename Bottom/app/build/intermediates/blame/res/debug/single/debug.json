@@ -1,0 +1,174 @@
+[
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable_x.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable\\x.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_notice_list.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_notice_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\menu_status_menu.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\menu\\status_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable_o.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable\\o.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_introduce_developer.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_introduce_developer.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_layout_listview_text.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_layout_listview_text.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_home.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable-v24\\home.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_list_detail.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\list_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_statistics.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable-v24\\statistics.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_recycle_notification.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_recycle_notification.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_bar.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable-xhdpi\\bar.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_listveiw_item_history.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\listveiw_item_history.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_notification.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_notification.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_list.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable-v24\\list.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable_boarder_layout.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable\\boarder_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_icon2.jpg.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable-xxhdpi\\icon2.jpg"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_statistics.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\statistics.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_history.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable-v24\\history.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_system_header.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_system_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_another.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable-v24\\another.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_user_header.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_user_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_home.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\home.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_list.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\list.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_history.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\history.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_notice.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_notice.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\menu_bottomnavigationview.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\menu\\bottomnavigationview.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_icon1.jpg.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable-xxhdpi\\icon1.jpg"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_listview_item_list.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\listview_item_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_layout_listview_switch.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_layout_listview_switch.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_selectgoal.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\selectgoal.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_developer_header.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_developer_header.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\drawable_border_round_layout.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\drawable\\border_round_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\build\\intermediates\\res\\merged\\debug\\layout_another_version.xml.flat",
+        "source": "C:\\Users\\hwan\\Desktop\\hwan\\Bottom\\app\\src\\main\\res\\layout\\another_version.xml"
+    }
+]
