@@ -15,10 +15,7 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
-import com.cookandroid.bottom_setting.R;
 
 public class List extends Fragment {
     /*
@@ -43,7 +40,7 @@ public class List extends Fragment {
 
 
         final ListView listview ;
-        final CustomChoiceListViewAdapter_List adapter;
+        final List_CustomChoiceListViewAdapter adapter;
         final Intent intent = new Intent(getActivity(),SelectGoal.class);
         // 체크박스
         boolean mClick = false;
@@ -54,7 +51,7 @@ public class List extends Fragment {
         */
 
         // Adapter 생성
-        adapter = new CustomChoiceListViewAdapter_List() ;
+        adapter = new List_CustomChoiceListViewAdapter() ;
 
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) view.findViewById(R.id.listview1);
@@ -74,7 +71,7 @@ public class List extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 // get item
-                ListViewItem item = (ListViewItem) parent.getItemAtPosition(position) ;
+                List_Listview_Item item = (List_Listview_Item) parent.getItemAtPosition(position) ;
 
                 String goalStr = item.getGoal() ;
                 String sdateStr = item.getSdate() ;
