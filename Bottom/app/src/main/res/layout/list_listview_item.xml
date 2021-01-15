@@ -2,10 +2,11 @@
 <com.cookandroid.bottom_setting.CheckableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/corner_shape_listview_item" >
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -92,7 +93,7 @@
 
     <CheckBox
         android:id="@+id/checkBox1"
-        android:layout_width="50dp"
+        android:layout_width="30dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:clickable="false"
