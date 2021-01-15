@@ -10,10 +10,7 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
-import com.cookandroid.bottom_setting.R;
 
 public class History extends Fragment {
 
@@ -23,7 +20,7 @@ public class History extends Fragment {
         View view = inflater.inflate(R.layout.history, container, false);
 
         final ListView listview ;
-        final CustomChoiceListViewAdapter_History adapter;
+        final History_CustomChoiceListViewAdapter adapter;
 
         // 체크박스
         boolean mClick = false;
@@ -34,7 +31,7 @@ public class History extends Fragment {
         */
 
         // Adapter 생성
-        adapter = new CustomChoiceListViewAdapter_History() ;
+        adapter = new History_CustomChoiceListViewAdapter() ;
 
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) view.findViewById(R.id.listview2);
@@ -54,7 +51,7 @@ public class History extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 // get item
-                ListViewItem item = (ListViewItem) parent.getItemAtPosition(position) ;
+                List_Listview_Item item = (List_Listview_Item) parent.getItemAtPosition(position) ;
 
                 String goalStr = item.getGoal() ;
                 String sdateStr = item.getSdate() ;

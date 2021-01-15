@@ -11,22 +11,22 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CustomChoiceListViewAdapter_History extends BaseAdapter {
+public class History_CustomChoiceListViewAdapter extends BaseAdapter {
 
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
+    private ArrayList<List_Listview_Item> listViewItemListList = new ArrayList<List_Listview_Item>() ;
 
     // 체크박스
     private boolean mClick = false;
 
     // ListViewAdapter의 생성자
-    public CustomChoiceListViewAdapter_History() {
+    public History_CustomChoiceListViewAdapter() {
 
     }
 
     @Override
     public int getCount() {
-        return listViewItemList.size() ;
+        return listViewItemListList.size() ;
     }
 
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
@@ -38,7 +38,7 @@ public class CustomChoiceListViewAdapter_History extends BaseAdapter {
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listveiw_item_history, parent, false);
+            convertView = inflater.inflate(R.layout.history_listveiw_item, parent, false);
         }
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
@@ -50,15 +50,15 @@ public class CustomChoiceListViewAdapter_History extends BaseAdapter {
         ImageView isDoneImageView = (ImageView) convertView.findViewById(R.id.isDone) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        ListViewItem listViewItem = listViewItemList.get(position);
+        List_Listview_Item listListViewItem = listViewItemListList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        goalTextView.setText(listViewItem.getGoal());
-        sdateTextView.setText(listViewItem.getSdate());
-        edateTextView.setText(listViewItem.getEdate());
-        etcTextView.setText(listViewItem.getEtc());
-        buildingImageView.setImageDrawable(listViewItem.getBuilding());
-        isDoneImageView.setImageDrawable(listViewItem.getIsDone());
+        goalTextView.setText(listListViewItem.getGoal());
+        sdateTextView.setText(listListViewItem.getSdate());
+        edateTextView.setText(listListViewItem.getEdate());
+        etcTextView.setText(listListViewItem.getEtc());
+        buildingImageView.setImageDrawable(listListViewItem.getBuilding());
+        isDoneImageView.setImageDrawable(listListViewItem.getIsDone());
 
         return convertView;
     }
@@ -74,12 +74,12 @@ public class CustomChoiceListViewAdapter_History extends BaseAdapter {
     @Override
     public Object getItem(int position) {
 
-        return listViewItemList.get(position) ;
+        return listViewItemListList.get(position) ;
     }
 
     // 아이템 데이터 추가를 위한 함수.
     public void addItem(String goal, String sdate, String edate, String etc, Drawable building, Drawable isDone) {
-        ListViewItem item = new ListViewItem();
+        List_Listview_Item item = new List_Listview_Item();
 
         item.setGoal(goal);
         item.setSdate(sdate);
@@ -88,14 +88,14 @@ public class CustomChoiceListViewAdapter_History extends BaseAdapter {
         item.setBuilding(building);
         item.setIsDone(isDone);
 
-        listViewItemList.add(item);
+        listViewItemListList.add(item);
     }
 
     // 아이템 데이터 삭제를 위한 함수. (미완성)
     public void removeItem(int num) {
-        ListViewItem item = new ListViewItem();
+        List_Listview_Item item = new List_Listview_Item();
 
 
-        listViewItemList.remove(item);
+        listViewItemListList.remove(item);
     }
 }
