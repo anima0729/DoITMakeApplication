@@ -95,7 +95,7 @@ public class List extends Fragment {
 
         // delete button에 대한 이벤트 처리. (미완성)
         // 선택해제 기능뿐.
-        ImageButton deleteButton = (ImageButton)view.findViewById(R.id.delete) ;
+        final ImageButton deleteButton = (ImageButton)view.findViewById(R.id.delete) ;
         deleteButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
@@ -116,7 +116,6 @@ public class List extends Fragment {
         }) ;
 
         // selectAll button에 대한 이벤트 처리.
-
         final ImageButton selectAllButton = (ImageButton)view.findViewById(R.id.selectAll) ;
         selectAllButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -152,11 +151,16 @@ public class List extends Fragment {
         final ImageButton modifyButton = (ImageButton)view.findViewById(R.id.modify) ;
         modifyButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                // 모든 선택 상태 초기화.
+                listview.clearChoices() ;
+
                 if(selectAllButton.getVisibility() == View.GONE) {
                     selectAllButton.setVisibility(View.VISIBLE);
+                    deleteButton.setVisibility(View.VISIBLE);
                     adapter.toggleCheckBox(true);
                 } else {
                     selectAllButton.setVisibility(View.GONE);
+                    deleteButton.setVisibility(View.GONE);
                     adapter.toggleCheckBox(false);
                 }
             }
