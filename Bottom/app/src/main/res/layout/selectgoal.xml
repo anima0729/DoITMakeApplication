@@ -8,7 +8,8 @@
     tools:context=".MainActivity">
 
 
-    <EditText
+
+<EditText
         android:id="@+id/goal"
         android:layout_margin="30dp"
         android:layout_width="match_parent"
@@ -210,7 +211,10 @@
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"
         android:layout_marginBottom="52dp"
+        android:backgroundTint="#473536"
+        android:textColor="#ffffff"
         android:text="@string/Save"
+        android:background="@drawable/login_button_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cancel" />
@@ -225,6 +229,9 @@
         android:layout_marginRight="80dp"
         android:layout_marginBottom="52dp"
         android:gravity="center"
+        android:backgroundTint="#473536"
+        android:background="@drawable/login_button_background"
+        android:textColor="#ffffff"
         android:text="@string/Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/save"
