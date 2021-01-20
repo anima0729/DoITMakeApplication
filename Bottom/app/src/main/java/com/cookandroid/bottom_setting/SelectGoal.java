@@ -198,7 +198,7 @@ public class SelectGoal extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
 
         EditText editstartdate = (EditText) findViewById(R.id.editstartdate);
-        editstartdate.setText(sdf.format(myCalendar2.getTime()));
+        editstartdate.setText(sdf.format(myCalendar1.getTime()));
     }
 
     private void updateLabel2() {

@@ -62,4 +62,7 @@
     <string name="naver_client_secret">GsDryj6kDC</string>
     <string name="naver_client_name">Project</string>
 
+    <string name="naver_google">Or</string>
+
+
 </resources>
