@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.cookandroid.bottom_setting.CheckableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.cookandroid.bottom_setting.List_Checkable_LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -100,4 +100,4 @@
         android:focusable="false"
         android:visibility="invisible"/>
 
-</com.cookandroid.bottom_setting.CheckableLinearLayout>
+</com.cookandroid.bottom_setting.List_Checkable_LinearLayout>
