@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,10 +23,13 @@ public class MainActivity extends AppCompatActivity {
     private History history = new History();
     private Statistics statistics = new Statistics();
     private Another another = new Another();
-
+    //DB 객체
+    public static List_DB_Open List_DB = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //DB 테이블 초기화
+        init_tables();
         // 시작시 언어 변경하기
         String custom_lang = PreferenceManager.getString(getApplicationContext(), "lang");
         Locale locale = new Locale(custom_lang);
@@ -80,5 +84,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+    //DB 사용을 위해 table 초기화
+    private void init_tables() {
+        List_DB = new List_DB_Open(this) ;
+        SQLiteDatabase db=List_DB.getWritableDatabase();
+        //db.execSQL(List_DB_Make.SQL_DELETE) ; //DB 완전히 초기화
+        List_DB.onCreate(db);
     }
 }

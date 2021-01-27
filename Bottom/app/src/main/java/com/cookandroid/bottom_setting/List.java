@@ -2,8 +2,11 @@ package com.cookandroid.bottom_setting;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +20,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class List extends Fragment {
-    /*
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import static com.cookandroid.bottom_setting.MainActivity.List_DB;
+
+public class List extends Fragment {
+
+    /*
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.list, container, false);
-
     }
     */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +47,11 @@ public class List extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list, container, false);
 
-
         final ListView listview ;
         final List_CustomChoiceListViewAdapter adapter;
         final Intent intent = new Intent(getActivity(),SelectGoal.class);
         // 체크박스
         boolean mClick = false;
-
-        /*
-        // 빈 데이터 리스트 생성.
-        final ArrayList<String> items = new ArrayList<String>() ;
-        */
 
         // Adapter 생성
         adapter = new List_CustomChoiceListViewAdapter() ;
@@ -57,14 +60,8 @@ public class List extends Fragment {
         listview = (ListView) view.findViewById(R.id.listview1);
         listview.setAdapter(adapter);
 
-        // 첫 번째 아이템 추가.
-        adapter.addItem("project1", "2020.09.21.M", "2022.03.20.S", "c++"
-                , getResources().getDrawable(R.drawable.icon1),
-                "30%") ;
-        // 두 번째 아이템 추가.
-        adapter.addItem("project2", "2020.09.20.S", "2020.09.25.F","c#" + '\n' + "windowsprograming"
-                , getResources().getDrawable(R.drawable.icon2),
-                "70%" ) ;
+        load_values(adapter);
+
 
         // 위에서 생성한 listview에 클릭 이벤트 핸들러 정의.
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,25 +70,25 @@ public class List extends Fragment {
                 // get item
                 List_Listview_Item item = (List_Listview_Item) parent.getItemAtPosition(position) ;
 
-                String goalStr = item.getGoal() ;
-                String sdateStr = item.getSdate() ;
-                String edateStr = item.getEdate() ;
-                String etcStr = item.getEtc() ;
-                Drawable buildingDrawable = item.getBuilding() ;
-                String percentStr = item.getPer() ;
+                String Title = item.getGoal();
+                Intent intent = new Intent(getActivity(), List_Detail.class);
+                intent.putExtra("Title", Title);
+                startActivity(intent);
 
                 // TODO : use item data.
             }
         }) ;
 
         // add button에 대한 이벤트 처리. (미완성)
-        ImageButton addButton = (ImageButton)view.findViewById(R.id.add) ;
+        ImageButton addButton = (ImageButton) view.findViewById(R.id.add);
         addButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                startActivity(intent);//액티비티 띄우기
+                startActivityForResult(intent, 0);
+                //startActivity(intent);//액티비티 띄우기
             }
 
-        }) ;
+
+        });
 
         // delete button에 대한 이벤트 처리. (미완성)
         // 선택해제 기능뿐.
@@ -167,5 +164,78 @@ public class List extends Fragment {
         }) ;
 
         return view;
+    }
+    public void load_values(List_CustomChoiceListViewAdapter adapter) {
+
+        SQLiteDatabase db = List_DB.getReadableDatabase();//SQLiteDatabase.openOrCreateDatabase("List_20_11_22.db",MODE_PRIVATE,null) ;
+        Cursor cursor = db.rawQuery(List_DB_Make.SQL_SELECT, null);
+        int RecordCount = cursor.getCount();
+
+        //if (cursor.moveToFirst()) {
+        for (int i = 0; i < RecordCount; i++) {
+
+            cursor.moveToNext();
+            // List_No (INTEGER) 값 가져오기.
+            //int List_No = cursor.getInt(0) ;
+
+            // List_Title (INTEGER) 값 가져오기.
+            String List_Title = cursor.getString(0);
+
+            // List_Term_Start (TEXT) 값 가져오기
+            String List_Term_Start = cursor.getString(1);
+
+            // List_Term_End (TEXT) 값 가져오기
+            String List_Term_End = cursor.getString(2);
+
+            // List_Time_Start (TEXT) 값 가져오기
+            String List_Time_Start = cursor.getString(3);
+
+            // List_Time_End (TEXT) 값 가져오기
+            String List_Time_End = cursor.getString(4);
+
+            // List_Level (TEXT) 값 가져오기
+            String List_Level = cursor.getString(5);
+
+            // List_Category (TEXT) 값 가져오기
+            String List_Category = cursor.getString(6);
+
+            // List_Degree_Goal (TEXT) 값 가져오기
+            String List_Detail = cursor.getString(7);
+
+            // List_Detail (TEXT) 값 가져오기
+            String List_Degree_Goal = cursor.getString(8);
+
+            float total = 0;
+
+            String strFormat = "yyyy/MM/dd";
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat(strFormat);
+            String strToday = sdf.format(date);
+            {
+                try {
+                    Date startDate = sdf.parse(List_Term_Start);
+                    Date endDate = sdf.parse(List_Term_End);
+                    Date today = sdf.parse(strToday);
+
+                    float diffDay = (startDate.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
+                    float nowDay = (today.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
+                    total = (nowDay / diffDay) * 100;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            String per = (100 - (int) total) + "%";
+
+            Log.d("k2", per);
+
+            //Title, 시작기간, 끝난 기간, 디테일 , 퍼센트
+            if (total <= 100 && total >= 0) {
+                adapter.addItem(List_Title, List_Term_Start, List_Term_End, List_Detail
+                        , getResources().getDrawable(R.drawable.icon2), per);
+                db.close();
+            }
+
+        }
     }
 }
