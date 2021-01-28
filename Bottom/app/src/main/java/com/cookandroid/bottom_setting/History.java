@@ -49,12 +49,10 @@ public class History extends Fragment {
         load_values(adapter);
         /*
         // 첫 번째 아이템 추가.
-        adapter.addItem("project1", "2020.09.21.M", "2022.03.20.S", "c++"
-                , getResources().getDrawable(R.drawable.icon1),
+        adapter.addItem("project1", "2020.09.21.M", "2022.03.20.S", "c++",
                 getResources().getDrawable(R.drawable.o)) ;
         // 두 번째 아이템 추가.
-        adapter.addItem("project2", "2020.09.20.S", "2020.09.25.F","c#" + '\n' + "windowsprograming"
-                ,getResources().getDrawable(R.drawable.icon2),
+        adapter.addItem("project2", "2020.09.20.S", "2020.09.25.F","c#" + '\n' + "windowsprograming",
                 getResources().getDrawable(R.drawable.x) ) ;
 
          */
@@ -70,7 +68,6 @@ public class History extends Fragment {
                 String sdateStr = item.getSdate() ;
                 String edateStr = item.getEdate() ;
                 String etcStr = item.getEtc() ;
-                Drawable buildingDrawable = item.getBuilding() ;
                 Drawable isDoneDrawable = item.getIsDone() ;
 
                 // TODO : use item data.
@@ -140,8 +137,7 @@ public class History extends Fragment {
             }
             String per= "X";
             if (total > 100 || total < 0) {
-                adapter.addItem(List_Title, List_Term_Start, List_Term_End, List_Detail
-                        , getResources().getDrawable(R.drawable.icon2), "");
+                adapter.addItem(List_Title, List_Term_Start, List_Term_End, List_Detail, "");
                 db.close();
             }
         }

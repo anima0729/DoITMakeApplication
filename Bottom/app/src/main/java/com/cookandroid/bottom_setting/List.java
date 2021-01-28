@@ -231,8 +231,7 @@ public class List extends Fragment {
 
             //Title, 시작기간, 끝난 기간, 디테일 , 퍼센트
             if (total <= 100 && total >= 0) {
-                adapter.addItem(List_Title, List_Term_Start, List_Term_End, List_Detail
-                        , getResources().getDrawable(R.drawable.icon2), per);
+                adapter.addItem(List_Title, List_Term_Start, List_Term_End, List_Detail, per);
                 db.close();
             }
 

@@ -7,7 +7,6 @@ public class List_Listview_Item {
     private String sdateStr;
     private String edateStr;
     private String etcStr;
-    private Drawable buildingDrawable;
     private String perStr;
     private Drawable isDoneDrawable;
 
@@ -21,9 +20,6 @@ public class List_Listview_Item {
     public void setEtc(String etc) {
         etcStr = etc;
     }
-    public void setBuilding(Drawable building) {
-        buildingDrawable = building;
-    }
     public void setPer(String per) { perStr = per; }
     public void setIsDone(Drawable isDone) {
         isDoneDrawable = isDone;
@@ -36,9 +32,6 @@ public class List_Listview_Item {
     public String getEdate() { return this.edateStr; }
     public String getEtc() {
         return this.etcStr;
-    }
-    public Drawable getBuilding() {
-        return this.buildingDrawable;
     }
     public String getPer() {
         return this.perStr;

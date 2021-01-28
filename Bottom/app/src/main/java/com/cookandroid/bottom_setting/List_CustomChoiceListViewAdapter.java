@@ -47,7 +47,6 @@ public class List_CustomChoiceListViewAdapter extends BaseAdapter {
         TextView sdateTextView = (TextView) convertView.findViewById(R.id.sdate) ;
         TextView edateTextView = (TextView) convertView.findViewById(R.id.edate) ;
         TextView etcTextView = (TextView) convertView.findViewById(R.id.etc) ;
-        ImageView buildingImageView = (ImageView) convertView.findViewById(R.id.building) ;
         TextView perTextView = (TextView) convertView.findViewById(R.id.per) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
@@ -58,7 +57,6 @@ public class List_CustomChoiceListViewAdapter extends BaseAdapter {
         sdateTextView.setText(listListViewItem.getSdate());
         edateTextView.setText(listListViewItem.getEdate());
         etcTextView.setText(listListViewItem.getEtc());
-        buildingImageView.setImageDrawable(listListViewItem.getBuilding());
         perTextView.setText(listListViewItem.getPer());
 
         // 체크박스
@@ -94,14 +92,13 @@ public class List_CustomChoiceListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수.
-    public void addItem(String goal, String sdate, String edate, String etc, Drawable building, String per) {
+    public void addItem(String goal, String sdate, String edate, String etc, String per) {
         List_Listview_Item item = new List_Listview_Item();
 
         item.setGoal(goal);
         item.setSdate(sdate);
         item.setEdate(edate);
         item.setEtc(etc);
-        item.setBuilding(building);
         item.setPer(per);
 
         listViewItemListList.add(item);
