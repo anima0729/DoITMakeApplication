@@ -46,7 +46,6 @@ public class History_CustomChoiceListViewAdapter extends BaseAdapter {
         TextView sdateTextView = (TextView) convertView.findViewById(R.id.sdate) ;
         TextView edateTextView = (TextView) convertView.findViewById(R.id.edate) ;
         TextView etcTextView = (TextView) convertView.findViewById(R.id.etc) ;
-        ImageView buildingImageView = (ImageView) convertView.findViewById(R.id.building) ;
         ImageView isDoneImageView = (ImageView) convertView.findViewById(R.id.isDone) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
@@ -57,7 +56,6 @@ public class History_CustomChoiceListViewAdapter extends BaseAdapter {
         sdateTextView.setText(listListViewItem.getSdate());
         edateTextView.setText(listListViewItem.getEdate());
         etcTextView.setText(listListViewItem.getEtc());
-        buildingImageView.setImageDrawable(listListViewItem.getBuilding());
         isDoneImageView.setImageDrawable(listListViewItem.getIsDone());
 
         return convertView;
@@ -78,14 +76,13 @@ public class History_CustomChoiceListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수.
-    public void addItem(String goal, String sdate, String edate, String etc, Drawable building, Drawable isDone) {
+    public void addItem(String goal, String sdate, String edate, String etc, Drawable isDone) {
         List_Listview_Item item = new List_Listview_Item();
 
         item.setGoal(goal);
         item.setSdate(sdate);
         item.setEdate(edate);
         item.setEtc(etc);
-        item.setBuilding(building);
         item.setIsDone(isDone);
 
         listViewItemListList.add(item);
