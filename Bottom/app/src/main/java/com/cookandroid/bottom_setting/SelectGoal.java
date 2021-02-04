@@ -1,11 +1,14 @@
 package com.cookandroid.bottom_setting;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 
 import android.app.TimePickerDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -24,6 +27,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import static com.cookandroid.bottom_setting.MainActivity.List_DB;
 
 public class SelectGoal extends AppCompatActivity {
 
@@ -65,7 +70,7 @@ public class SelectGoal extends AppCompatActivity {
         final EditText editendtime = (EditText) findViewById(R.id.editendtime);
         final EditText editstartdate = (EditText) findViewById(R.id.editstartdate);
         final EditText editenddate = (EditText) findViewById(R.id.editenddate);
-        TextView category=(TextView)findViewById(R.id.category);
+        final TextView category=(TextView)findViewById(R.id.category);
         TextView textView=(TextView)findViewById(R.id.textView2);
         Button save=(Button)findViewById(R.id.save);
         Button cancle=(Button)findViewById(R.id.cancel);
@@ -148,6 +153,37 @@ public class SelectGoal extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"목표를 입력하지 않았습니다.",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    SQLiteDatabase db = List_DB.getWritableDatabase();
+
+                    String title= goal.getText().toString();
+                    String list_term_start=editstartdate.getText().toString();
+                    String list_term_end=editenddate.getText().toString();
+                    String list_time_start=editstrattime.getText().toString();
+                    String list_time_end=editendtime.getText().toString();
+                    String list_level="6";
+                    String list_category=category.getText().toString();
+                    String list_detail="";
+                    String list_degree_goal="9";
+
+                    String sqlInsert = List_DB_Make.SQL_INSERT +
+                            " (" +
+                            "'"+    title           + "', " +
+                            "'"+    list_term_start + "', " +
+                            "'"+    list_term_end   + "', " +
+                            "'"+    list_time_start + "', " +
+                            "'"+    list_time_end   + "', " +
+                            "'" +   list_level      + "', " +
+                            "'" +   list_category   + "', " +
+                            "'" +   list_detail     + "', " +
+                            "'" +   list_degree_goal+ "'" +
+                            ")" ;
+
+                    db.execSQL(sqlInsert) ;
+
+                    Intent intent = new Intent(getApplication(),List.class);
+                    setResult(Activity.RESULT_OK,intent);
+
+                    db.close();
                     finish();
                 }
             }
