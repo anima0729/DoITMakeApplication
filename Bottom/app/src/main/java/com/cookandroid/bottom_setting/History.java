@@ -1,5 +1,6 @@
 package com.cookandroid.bottom_setting;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
@@ -62,13 +63,12 @@ public class History extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 // get item
-                List_Listview_Item item = (List_Listview_Item) parent.getItemAtPosition(position) ;
+                List_Listview_Item item = (List_Listview_Item) parent.getItemAtPosition(position);
 
-                String goalStr = item.getGoal() ;
-                String sdateStr = item.getSdate() ;
-                String edateStr = item.getEdate() ;
-                String etcStr = item.getEtc() ;
-                Drawable isDoneDrawable = item.getIsDone() ;
+                String Title = item.getGoal();
+                Intent intent = new Intent(getActivity(), List_Detail.class);
+                intent.putExtra("Title", Title);
+                startActivity(intent);
 
                 // TODO : use item data.
             }

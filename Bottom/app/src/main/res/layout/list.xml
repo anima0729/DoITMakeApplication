@@ -19,7 +19,7 @@
             android:id="@+id/delete"
             android:layout_width="150px"
             android:layout_height="match_parent"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:srcCompat="@android:drawable/ic_menu_delete" />
 
         <ImageButton
@@ -27,7 +27,7 @@
             android:layout_width="150px"
             android:layout_height="match_parent"
             app:srcCompat="@android:drawable/checkbox_off_background"
-            android:visibility="invisible" />
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/modify"

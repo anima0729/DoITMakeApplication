@@ -62,23 +62,6 @@ public class List extends Fragment {
 
         load_values(adapter);
 
-
-        // 위에서 생성한 listview에 클릭 이벤트 핸들러 정의.
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                // get item
-                List_Listview_Item item = (List_Listview_Item) parent.getItemAtPosition(position) ;
-
-                String Title = item.getGoal();
-                Intent intent = new Intent(getActivity(), List_Detail.class);
-                intent.putExtra("Title", Title);
-                startActivity(intent);
-
-                // TODO : use item data.
-            }
-        }) ;
-
         // add button에 대한 이벤트 처리. (미완성)
         ImageButton addButton = (ImageButton) view.findViewById(R.id.add);
         addButton.setOnClickListener(new Button.OnClickListener() {
@@ -163,8 +146,27 @@ public class List extends Fragment {
             }
         }) ;
 
+        // 위에서 생성한 listview에 클릭 이벤트 핸들러 정의.
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                if (selectAllButton.getVisibility() == View.GONE) {
+                    // get item
+                    List_Listview_Item item = (List_Listview_Item) parent.getItemAtPosition(position);
+
+                    String Title = item.getGoal();
+                    Intent intent = new Intent(getActivity(), List_Detail.class);
+                    intent.putExtra("Title", Title);
+                    startActivity(intent);
+
+                    // TODO : use item data.
+                }
+            }
+        }) ;
+
         return view;
     }
+
     public void load_values(List_CustomChoiceListViewAdapter adapter) {
 
         SQLiteDatabase db = List_DB.getReadableDatabase();//SQLiteDatabase.openOrCreateDatabase("List_20_11_22.db",MODE_PRIVATE,null) ;
