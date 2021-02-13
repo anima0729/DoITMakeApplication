@@ -1,4 +1,4 @@
-package com.cookandroid.bottom_setting;
+ package com.cookandroid.bottom_setting;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -148,6 +148,10 @@ public class LoginActivity extends AppCompatActivity {
                             Log.i("LoginData","tokenType : "+ tokenType);
 
                             Intent intent = new Intent(mContext, MainActivity.class);
+                            intent.putExtra("accessToken", accessToken);
+                            intent.putExtra("refreshToken", refreshToken);
+                            intent.putExtra("expiresAt", expiresAt);
+                            intent.putExtra("tokenType", tokenType);
                             startActivity(intent);
 
                         } else {
@@ -173,7 +177,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });*/
     }
-
 
 
     public void loginUser(String email, String password) {
@@ -205,4 +208,8 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
     }
+
+
+
+
 }

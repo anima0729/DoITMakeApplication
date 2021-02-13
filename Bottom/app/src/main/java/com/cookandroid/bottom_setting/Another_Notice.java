@@ -109,6 +109,7 @@ public class Another_Notice extends AppCompatActivity {
                 }
                 noticeListView.setAdapter(noticeAdapter);
 
+
                 for (int i = length-1; i >= 0; i--) {
                     noticeAdapter.addItem(id[i], title[i], writer[i], date[i]);
                 }
