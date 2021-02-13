@@ -2,29 +2,47 @@ package com.cookandroid.bottom_setting;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.nhn.android.naverlogin.OAuthLogin;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Bottom Navigation
     private Home home = new Home();
     private List list = new List();
     private History history = new History();
     private Statistics statistics = new Statistics();
     private Another another = new Another();
+
+    // Login NAVER Token
+    String accessToken;
+
+    //Profile
+    JSONObject profile;
+    String gender;
+    String nickname;
+    String id;
+
     //DB 객체
     public static List_DB_Open List_DB = null;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +70,30 @@ public class MainActivity extends AppCompatActivity {
         else {
             setTheme(R.style.Basic);
         }
+
         // 컨텐트 뷰 설정
         setContentView(R.layout.activity_main);
+
+        // Naver 접근 토큰 받아오기
+        Intent intent_main = new Intent(this.getIntent());
+        accessToken = intent_main.getStringExtra("accessToken");
+        // 토큰을 이용하여 프로필 정보 받아오기
+        ApiMemberProfile apiMemberProfile = new ApiMemberProfile(accessToken);
+        apiMemberProfile.start();
+        profile = apiMemberProfile.return_profile();
+        // 받아온 정보를 PreferenceManager에 저장
+        try {
+            if (profile != null) {
+                id = (String) profile.getString("id");
+                gender = (String) profile.getString("gender");
+                nickname = (String) profile.getString("nickname");
+                PreferenceManager.setString(getApplicationContext(), "id", id);
+                PreferenceManager.setString(getApplicationContext(), "gender", gender);
+                PreferenceManager.setString(getApplicationContext(), "nickname", nickname);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, home).commit();
 
@@ -85,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+    
     //DB 사용을 위해 table 초기화
     private void init_tables() {
         List_DB = new List_DB_Open(this) ;

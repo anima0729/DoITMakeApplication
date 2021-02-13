@@ -48,10 +48,10 @@ public class List_Detail extends AppCompatActivity {
         String List_Term_Start = cursor.getString(1);
 
         // List_Term_End (TEXT) 값 가져오기
-        String List_Term_End = cursor.getString(2) ;
+        String List_Term_End = cursor.getString(2);
 
         // List_Time_Start (TEXT) 값 가져오기
-        String List_Time_Start = cursor.getString(3) ;
+        String List_Time_Start = cursor.getString(3);
 
         // List_Time_End (TEXT) 값 가져오기
         String List_Time_End = cursor.getString(4);
@@ -60,10 +60,10 @@ public class List_Detail extends AppCompatActivity {
         String List_Level = cursor.getString(5);
 
         // List_Category (TEXT) 값 가져오기
-        String List_Category = cursor.getString(6) ;
+        String List_Category = cursor.getString(6);
 
         // List_Degree_Goal (TEXT) 값 가져오기
-        String List_Detail = cursor.getString(7) ;
+        String List_Detail = cursor.getString(7);
         // List_Detail (TEXT) 값 가져오기
         String List_Degree_Goal = cursor.getString(8);
 

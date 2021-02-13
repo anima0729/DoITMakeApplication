@@ -54,7 +54,7 @@
         android:backgroundTint="@color/colordarkYellow"
         android:ems="10"
         android:gravity="center"
-        android:hint="사용자 이름"
+        android:hint="닉네임"
         android:inputType="textPersonName"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/editText_email"
