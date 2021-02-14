@@ -79,15 +79,22 @@ public class List extends Fragment {
         deleteButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
+                SQLiteDatabase db = List_DB.getWritableDatabase();
                 int count = adapter.getCount() ;
-
+                //adapter.it
                 for (int i = count-1; i >= 0; i--) {
                     if (checkedItems.get(i)) {
-                        // 함수 (미완성)
-                        adapter.removeItem(i);
+                        //adapter.getItem(i).getGoal();
+                        String SQLdelete="DELETE FROM List_20_11_22 WHERE TITLE = '"+adapter.getItem(i).getGoal()+"'";
+                        Log.d("index",adapter.getItem(i).getGoal());
+                        db.execSQL(SQLdelete);
+
+                        //if(listview.isItemChecked(i);
+
+                        //adapter.removeItem(1);
                     }
                 }
-
+                db.close();
                 // 모든 선택 상태 초기화.
                 listview.clearChoices() ;
 

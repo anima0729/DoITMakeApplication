@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     String id;
 
     //DB 객체
-    public static List_DB_Open List_DB = null;
+    public static List_DB_Open List_DB;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {

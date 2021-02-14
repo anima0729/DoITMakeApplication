@@ -13,9 +13,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class List_CustomChoiceListViewAdapter extends BaseAdapter {
-
+     String Goal=null;
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    private ArrayList<List_Listview_Item> listViewItemListList = new ArrayList<List_Listview_Item>() ;
+    ArrayList<List_Listview_Item> listViewItemListList = new  ArrayList<List_Listview_Item>() ;
 
     // 체크박스
     private boolean mClick = false;
@@ -59,6 +59,7 @@ public class List_CustomChoiceListViewAdapter extends BaseAdapter {
         etcTextView.setText(listListViewItem.getEtc());
         perTextView.setText(listListViewItem.getPer());
 
+
         // 체크박스
         CheckBox checkBox =  (CheckBox) convertView.findViewById(R.id.checkBox1);
         if(mClick) {
@@ -76,6 +77,10 @@ public class List_CustomChoiceListViewAdapter extends BaseAdapter {
         mClick = bClick;
         notifyDataSetChanged();
     }
+    public String getGoal(int position) {
+
+        return Goal;
+    }
 
     // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
     @Override
@@ -86,15 +91,15 @@ public class List_CustomChoiceListViewAdapter extends BaseAdapter {
 
     // 지정한 위치(position)에 있는 데이터 리턴 : 필수 구현
     @Override
-    public Object getItem(int position) {
+    public List_Listview_Item getItem(int position) {
 
-        return listViewItemListList.get(position) ;
+        return listViewItemListList.get(position);
     }
 
     // 아이템 데이터 추가를 위한 함수.
     public void addItem(String goal, String sdate, String edate, String etc, String per) {
         List_Listview_Item item = new List_Listview_Item();
-
+        Goal=goal;
         item.setGoal(goal);
         item.setSdate(sdate);
         item.setEdate(edate);

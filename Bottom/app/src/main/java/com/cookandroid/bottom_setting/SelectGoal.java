@@ -184,6 +184,7 @@ public class SelectGoal extends AppCompatActivity {
                     setResult(Activity.RESULT_OK,intent);
 
                     db.close();
+
                     finish();
                 }
             }
