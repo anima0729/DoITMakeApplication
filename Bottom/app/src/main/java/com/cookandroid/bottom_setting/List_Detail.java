@@ -3,6 +3,7 @@ package com.cookandroid.bottom_setting;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -80,7 +81,6 @@ public class List_Detail extends AppCompatActivity {
                         "\'"+    Detail +"\'" +
                         " WHERE TITLE = "   +
                         "'"+List_Title+"'";
-                Log.d("아아",sqlUpdate);
                 db.execSQL(sqlUpdate);
                 db.close();
                 finish();
