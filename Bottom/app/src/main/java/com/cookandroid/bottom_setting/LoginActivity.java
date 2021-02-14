@@ -147,6 +147,8 @@ public class LoginActivity extends AppCompatActivity {
                             Log.i("LoginData","expiresAt : "+ expiresAt);
                             Log.i("LoginData","tokenType : "+ tokenType);
 
+                            PreferenceManager.setString(getApplicationContext(), "accessToken", accessToken);
+
                             Intent intent = new Intent(mContext, MainActivity.class);
                             intent.putExtra("accessToken", accessToken);
                             intent.putExtra("refreshToken", refreshToken);
