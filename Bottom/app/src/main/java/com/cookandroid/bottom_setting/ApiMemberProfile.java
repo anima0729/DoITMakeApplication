@@ -1,7 +1,7 @@
 package com.cookandroid.bottom_setting;
 
-import android.os.AsyncTask;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -36,7 +36,6 @@ public class ApiMemberProfile extends Thread{
     }
     // 웹에 사용자의 Profile 정보 요청
     public void run() {
-
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("Authorization", header);
         String responseBody = get(apiURL,requestHeaders);
@@ -47,15 +46,14 @@ public class ApiMemberProfile extends Thread{
             e.printStackTrace();
         }
         try {
-            response = (JSONObject) profile.get("response");
+            this.response = (JSONObject) profile.get("response");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
-    // Class에서 바당온 Profile 정보를 타 Class에 반환
+    // Class에서 받아온 Profile 정보를 타 Class에 반환
     public JSONObject return_profile() {
-        return response;
+        return this.response;
     }
 
     private String get(String apiUrl, Map<String, String> requestHeaders){
@@ -83,7 +81,10 @@ public class ApiMemberProfile extends Thread{
     private HttpURLConnection connect(String apiUrl){
         try {
             URL url = new URL(apiUrl);
-            return (HttpURLConnection)url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setReadTimeout(5000);
+            httpURLConnection.setConnectTimeout(5000);
+            return httpURLConnection;
         } catch (MalformedURLException e) {
             throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
         } catch (IOException e) {
