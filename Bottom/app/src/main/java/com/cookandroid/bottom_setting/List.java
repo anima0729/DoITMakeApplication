@@ -157,7 +157,6 @@ public class List extends Fragment {
                     deleteButton.setVisibility(View.GONE);
                     adapter.toggleCheckBox(false);
                 }
-                Refresh_Fragment();
             }
         }) ;
 

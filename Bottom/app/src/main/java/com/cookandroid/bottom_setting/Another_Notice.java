@@ -18,7 +18,7 @@ import org.json.JSONObject;
 
 public class Another_Notice extends AppCompatActivity {
 
-    private static String IP = "172.18.32.1";
+    private static String IP = "172.18.224.1";
     int[] id;
     String[] title;
     String[] writer;
