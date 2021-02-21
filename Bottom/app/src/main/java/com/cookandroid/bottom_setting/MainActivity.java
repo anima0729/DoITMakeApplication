@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         // 등록된 ID가 아닌 경우 Web Server에 아이디를 등록합니다.
+
         if (find .equals("null")) {
             InsertData insert_profile = new InsertData();
             insert_profile.execute(insert_url, id, nickname, gender);
