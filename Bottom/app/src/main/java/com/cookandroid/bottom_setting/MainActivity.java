@@ -96,49 +96,35 @@ public class MainActivity extends AppCompatActivity {
         // Naver 접근 토큰 받아오기
         Intent intent_main = new Intent(this.getIntent());
         accessToken = intent_main.getStringExtra("accessToken");
-        // 토큰을 이용하여 프로필 정보 받아오기
-        ApiMemberProfile apiMemberProfile = new ApiMemberProfile(accessToken);
-        apiMemberProfile.start();
-        // Web Server에서 요청을 받아 profile JSONObject 객체를 받아올 때까지 Main Thread를 잠시 멈춤
-        try {
-            apiMemberProfile.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        profile = apiMemberProfile.return_profile();
-        // 받아온 정보를 PreferenceManager에 저장
-        try {
-            if (profile != null) {
-                id = (String) profile.getString("id");
-                gender = (String) profile.getString("gender");
-                nickname = (String) profile.getString("nickname");
-                // 추후 데이터를 Web Server에서 가져오는 게 될 경우 PreferenceManager 사용할 필요 X
-                PreferenceManager.setString(getApplicationContext(), "id", id);
-                PreferenceManager.setString(getApplicationContext(), "gender", gender);
-                PreferenceManager.setString(getApplicationContext(), "nickname", nickname);
+        if (accessToken != null) {
+            // 토큰을 이용하여 프로필 정보 받아오기
+            ApiMemberProfile apiMemberProfile = new ApiMemberProfile(accessToken);
+            apiMemberProfile.start();
+            // Web Server에서 요청을 받아 profile JSONObject 객체를 받아올 때까지 Main Thread를 잠시 멈춤
+            try {
+                apiMemberProfile.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            else {
+            profile = apiMemberProfile.return_profile();
+            // 받아온 정보를 PreferenceManager에 저장
+            try {
+                if (profile != null) {
+                    id = (String) profile.getString("id");
+                    gender = (String) profile.getString("gender");
+                    nickname = (String) profile.getString("nickname");
+                    // 추후 데이터를 Web Server에서 가져오는 게 될 경우 PreferenceManager 사용할 필요 X
+                    PreferenceManager.setString(getApplicationContext(), "id", id);
+                    PreferenceManager.setString(getApplicationContext(), "gender", gender);
+                    PreferenceManager.setString(getApplicationContext(), "nickname", nickname);
+                } else {
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        // 컨텐트 뷰 설정
-        setContentView(R.layout.activity_main);
-        // 이용자의 고유 Naver ID 값을 이용해 정보 불러오기
-        selectDatabase selectDatabase = new selectDatabase(find_url, null);
-        try {
-            find = selectDatabase.execute(id).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        // 등록된 ID가 아닌 경우 Web Server에 아이디를 등록합니다.
-
-        if (find .equals("null")) {
-            InsertData insert_profile = new InsertData();
-            insert_profile.execute(insert_url, id, nickname, gender);
+            // 이용자의 고유 Naver ID 값을 이용해 정보 불러오기
+            selectDatabase selectDatabase = new selectDatabase(find_url, null);
             try {
                 find = selectDatabase.execute(id).get();
             } catch (ExecutionException e) {
@@ -146,8 +132,22 @@ public class MainActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+            // 등록된 ID가 아닌 경우 Web Server에 아이디를 등록합니다.
 
+            if (find.equals("null")) {
+                InsertData insert_profile = new InsertData();
+                insert_profile.execute(insert_url, id, nickname, gender);
+                try {
+                    find = selectDatabase.execute(id).get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        // 컨텐트 뷰 설정
+        setContentView(R.layout.activity_main);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, home).commit();
 
