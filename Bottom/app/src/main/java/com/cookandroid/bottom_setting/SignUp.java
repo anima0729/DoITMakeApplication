@@ -1,7 +1,9 @@
 package com.cookandroid.bottom_setting;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,6 +15,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.Exclude;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
@@ -20,10 +35,16 @@ public class SignUp extends AppCompatActivity {
     private EditText editTextPassword;
     private EditText editTextName;
     private Button buttonJoin;
+    private DatabaseReference databaseReference;
+    private String id;
+    private String password;
+    private String name;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        //구글 로그인하는 거 추가
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -31,34 +52,72 @@ public class SignUp extends AppCompatActivity {
         editTextPassword = (EditText) findViewById(R.id.editText_passWord);
         editTextName = (EditText) findViewById(R.id.editText_name);
         buttonJoin = (Button) findViewById(R.id.btn_join);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
         buttonJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {
+                id=editTextEmail.getText().toString();
+                name=editTextName.getText().toString();
+                password=editTextPassword.getText().toString();
+
+                if (!id.equals("")&&!name.equals("")&&!password.equals("")) {
                     // 이메일과 비밀번호가 공백이 아닌 경우
-                    createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString(), editTextName.getText().toString());
+                    createUser(id, name, password);
                 } else {
                     // 이메일과 비밀번호가 공백인 경우
                     Toast.makeText(SignUp.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
     }
-    private void createUser(String email, String password, String name) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
+
+
+
+
+    private void createUser(String ID, String pw, String NAME) {
+        firebaseAuth.createUserWithEmailAndPassword(ID, pw)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // 회원가입 성공시
                             Toast.makeText(SignUp.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                            writeNewPost(true);
                             finish();
-                        }
-                        else {
+                        } else {
                             // 계정이 중복된 경우
                             Toast.makeText(SignUp.this, "가입할 수 없습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
+    }
+
+/*
+    public void postFirebaseDatabase(boolean add, String ID, String name, String password){
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> postValues = null;
+        if(add){
+            FirebasePost post = new FirebasePost(ID, name, password);
+            postValues = post.toMap();
+        }
+        childUpdates.put("/id_list/" + ID, postValues);
+        databaseReference.updateChildren(childUpdates);
+    }*/
+
+
+    private void writeNewPost(boolean add) {
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> postValues = null;
+
+        if(add){
+            FirebasePost user = new FirebasePost(id,name,password);
+            postValues = user.toMap();
+        }
+        childUpdates.put("/user/" + name, postValues);
+        databaseReference.updateChildren(childUpdates);
     }
 }
