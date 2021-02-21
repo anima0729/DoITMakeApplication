@@ -64,7 +64,7 @@ public class SignUp extends AppCompatActivity {
 
                 if (!id.equals("")&&!name.equals("")&&!password.equals("")) {
                     // 이메일과 비밀번호가 공백이 아닌 경우
-                    createUser(id, name, password);
+                    createUser(id, password, name);
                 } else {
                     // 이메일과 비밀번호가 공백인 경우
                     Toast.makeText(SignUp.this, "계정과 비밀번호를 입력하세요.", Toast.LENGTH_LONG).show();

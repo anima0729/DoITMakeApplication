@@ -46,7 +46,9 @@ public class ApiMemberProfile extends Thread{
             e.printStackTrace();
         }
         try {
-            this.response = (JSONObject) profile.get("response");
+            if (profile != null) {
+                this.response = (JSONObject) profile.get("response");
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
