@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Web Server Connect
     private static String TAG = "naver_profile";
-    private static String IP = "172.18.32.1";
+    private static String IP = "172.18.224.1";
     String find_url = "http://" + IP + "/naver_profile.php";
     String insert_url = "http://" + IP + "/naver_profile_insert.php";
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     String gender;
     String nickname;
     String id;
-    String find;
+    String find = "";
 
     //DB 객체
     public static List_DB_Open List_DB;
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             }
             // 등록된 ID가 아닌 경우 Web Server에 아이디를 등록합니다.
 
-            if (find.equals("null")) {
+            if (find == null) {
                 InsertData insert_profile = new InsertData();
                 insert_profile.execute(insert_url, id, nickname, gender);
                 try {
