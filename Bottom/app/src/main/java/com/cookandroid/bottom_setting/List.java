@@ -43,7 +43,6 @@ public class List extends Fragment {
     }
 
     public void Refresh_Fragment() {
-
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
     }
@@ -73,6 +72,7 @@ public class List extends Fragment {
         addButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 startActivityForResult(intent, 0);
+
                 Refresh_Fragment();
                 //startActivity(intent);//액티비티 띄우기
             }
@@ -157,7 +157,6 @@ public class List extends Fragment {
                     deleteButton.setVisibility(View.GONE);
                     adapter.toggleCheckBox(false);
                 }
-                Refresh_Fragment();
             }
         }) ;
 
