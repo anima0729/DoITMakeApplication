@@ -19,6 +19,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +42,11 @@ public class List extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    public void Refresh_Fragment() {
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
+    }
     @SuppressLint("UseCompatLoadingForDrawables")
     @Nullable
     @Override
@@ -67,6 +73,7 @@ public class List extends Fragment {
         addButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 startActivityForResult(intent, 0);
+                Refresh_Fragment();
                 //startActivity(intent);//액티비티 띄우기
             }
 
@@ -97,8 +104,8 @@ public class List extends Fragment {
                 db.close();
                 // 모든 선택 상태 초기화.
                 listview.clearChoices() ;
-
-                adapter.notifyDataSetChanged();
+                Refresh_Fragment();
+                //adapter.notifyDataSetChanged();
             }
         }) ;
 
@@ -150,6 +157,7 @@ public class List extends Fragment {
                     deleteButton.setVisibility(View.GONE);
                     adapter.toggleCheckBox(false);
                 }
+                Refresh_Fragment();
             }
         }) ;
 
