@@ -18,7 +18,6 @@ import org.json.JSONObject;
 
 public class Another_Notice extends AppCompatActivity {
 
-    private static String IP = "172.18.224.1";
     int[] id;
     String[] title;
     String[] writer;
@@ -33,6 +32,8 @@ public class Another_Notice extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.another_notice);
+
+        String IP = getString(R.string.web_IP);
 
         //Intent 받아오기
         Intent intent_notice = new Intent(this.getIntent());

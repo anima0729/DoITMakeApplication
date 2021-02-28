@@ -29,13 +29,6 @@ import static com.cookandroid.bottom_setting.MainActivity.List_DB;
 
 public class List extends Fragment {
 
-    /*
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list, container, false);
-    }
-    */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
