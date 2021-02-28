@@ -11,11 +11,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import org.json.JSONException;
 import org.w3c.dom.Text;
+
+import java.util.concurrent.ExecutionException;
 
 public class Another extends Fragment implements View.OnClickListener{
     // ProfileBox 텍스트 뷰
     TextView ProfileBox;
+
+    // Bundle에서 ID정보 받아오기
+    String id;
+    String find = "";
+
+    // Profile Info
+    String nickname;
+    String gender;
 
     public static Another newInstance() {
         return new Another();
@@ -30,9 +41,43 @@ public class Another extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // PreferenceManager를 이용한 Profile 정보 불러오기
-        String nickname = PreferenceManager.getString(getContext(), "nickname");
-        String gender = PreferenceManager.getString(getContext(), "gender");
+        // Web Server Connect
+        String IP = getString(R.string.web_IP);
+
+        Bundle bundle = getArguments();
+
+        if (bundle != null) {
+            id = bundle.getString("id");
+        }
+
+        // 이용자의 고유 Naver ID 값을 이용해 정보 불러오기
+        selectDatabase FindDatabase = new selectDatabase(IP, null, getContext());
+        try {
+            find = FindDatabase.execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // Naver 아이디로 로그인할 경우 실행
+        if (!find.equals("null")) {
+            Translate_JSON_NaverProfile naverProfile = null;
+            try {
+                naverProfile = new Translate_JSON_NaverProfile(find);
+                nickname = naverProfile.getNickname();
+                gender = naverProfile.getGender();
+            } catch (JSONException e) {
+                e.printStackTrace();
+                nickname = null;
+                gender = null;
+            }
+        }
+        // Naver 아이디로 로그인하는 경우가 아닐 경우
+        else {
+            nickname = null;
+            gender = null;
+        }
+
         View fv = inflater.inflate(R.layout.another, container, false);
 
         // ProfileBox에 Profile 정보 표시
