@@ -26,8 +26,8 @@ public class Home extends Fragment {
     String id;
 
     // Profile Info
-    Integer level;
-    Double exp;
+    Integer level = 0;
+    Double exp = 0.0;
 
     // Show Level & EXP
     ProgressBar exp_bar;

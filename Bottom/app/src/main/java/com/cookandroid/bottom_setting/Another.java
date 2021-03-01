@@ -25,8 +25,8 @@ public class Another extends Fragment implements View.OnClickListener{
     String find = "";
 
     // Profile Info
-    String nickname;
-    String gender;
+    String nickname = null;
+    String gender = null;
 
     public static Another newInstance() {
         return new Another();
@@ -59,23 +59,25 @@ public class Another extends Fragment implements View.OnClickListener{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // Naver 아이디로 로그인할 경우 실행
-        if (!find.equals("null")) {
-            Translate_JSON_NaverProfile naverProfile = null;
-            try {
-                naverProfile = new Translate_JSON_NaverProfile(find);
-                nickname = naverProfile.getNickname();
-                gender = naverProfile.getGender();
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if (id != null) {
+            // Naver 아이디로 로그인할 경우 실행
+            if (!find.equals("null")) {
+                Translate_JSON_NaverProfile naverProfile = null;
+                try {
+                    naverProfile = new Translate_JSON_NaverProfile(find);
+                    nickname = naverProfile.getNickname();
+                    gender = naverProfile.getGender();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    nickname = null;
+                    gender = null;
+                }
+            }
+            // Naver 아이디로 로그인하는 경우가 아닐 경우
+            else {
                 nickname = null;
                 gender = null;
             }
-        }
-        // Naver 아이디로 로그인하는 경우가 아닐 경우
-        else {
-            nickname = null;
-            gender = null;
         }
 
         View fv = inflater.inflate(R.layout.another, container, false);
