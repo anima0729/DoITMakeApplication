@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             setTheme(R.style.Basic);
         }
 
+
         String IP = getString(R.string.web_IP);
 
         // Naver 접근 토큰 받아오기
