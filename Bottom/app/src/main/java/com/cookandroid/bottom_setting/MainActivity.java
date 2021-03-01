@@ -152,11 +152,13 @@ public class MainActivity extends AppCompatActivity {
         // 컨텐트 뷰 설정
         setContentView(R.layout.activity_main);
 
-        // Bundle에 데이터 담아서 각 Fragment로 뿌려주기
-        bundle.putString("id", id);
-        list.setArguments(bundle);
-        home.setArguments(bundle);
-        another.setArguments(bundle);
+        if (accessToken != null) {
+            // Bundle에 데이터 담아서 각 Fragment로 뿌려주기
+            bundle.putString("id", id);
+            list.setArguments(bundle);
+            home.setArguments(bundle);
+            another.setArguments(bundle);
+        }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, home).commit();
 
