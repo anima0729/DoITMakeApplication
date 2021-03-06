@@ -1,7 +1,6 @@
 package com.cookandroid.bottom_setting;
 
 
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.AsyncTask;

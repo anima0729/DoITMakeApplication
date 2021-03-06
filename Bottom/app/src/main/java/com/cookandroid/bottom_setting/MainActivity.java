@@ -137,11 +137,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
             // 등록된 ID가 아닌 경우 Web Server에 아이디를 등록합니다.
-            if (find == null) {
+            if (find.equals("null")) {
                 InsertData insert_profile = new InsertData(IP, null, getApplicationContext());
                 insert_profile.execute(id, nickname, gender);
                 try {
-                    find = selectDatabase.execute(id).get();
+                    selectDatabase selectDatabase2 = new selectDatabase(IP, null, getApplicationContext());
+                    find = selectDatabase2.execute(id).get();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
