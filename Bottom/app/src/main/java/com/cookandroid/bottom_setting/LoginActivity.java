@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -69,15 +70,23 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth = null;
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInClient mGoogleSignInClient;
-
+    private TextView find_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        find_password = findViewById(R.id.find_password);
         firebaseAuth = FirebaseAuth.getInstance();
 
+        find_password.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View V){
+                Intent findpassword = new Intent(LoginActivity.this, Find_password.class);
+                startActivity(findpassword);
+            }
+        });
 
         /*
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

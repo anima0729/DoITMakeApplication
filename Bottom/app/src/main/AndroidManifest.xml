@@ -29,6 +29,8 @@
         <activity android:name=".SignUp"/>
         <activity android:name=".Logout"/>
         <activity android:name=".List_Detail"/>
+        <activity android:name=".Another_account"/>
+        <activity android:name=".Find_password"/>
     </application>
 
 </manifest>
