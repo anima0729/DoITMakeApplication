@@ -8,9 +8,9 @@ import android.app.TimePickerDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -25,14 +25,9 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -164,15 +159,15 @@ public class List_SelectGoal extends AppCompatActivity {
                 else{
                     SQLiteDatabase db = List_DB.getWritableDatabase();
 
-                    String title= goal.getText().toString();
-                    String list_term_start=editstartdate.getText().toString();
-                    String list_term_end=editenddate.getText().toString();
-                    String list_time_start=editstrattime.getText().toString();
-                    String list_time_end=editendtime.getText().toString();
-                    String list_level="6";
-                    String list_category=category.getText().toString();
-                    String list_detail="";
-                    String list_degree_goal="9";
+                    String title = goal.getText().toString();
+                    String list_term_start = editstartdate.getText().toString();
+                    String list_term_end = editenddate.getText().toString();
+                    String list_time_start = editstrattime.getText().toString();
+                    String list_time_end = editendtime.getText().toString();
+                    String list_level = "6";
+                    String list_category = category.getText().toString();
+                    String list_detail = "";
+                    String list_degree_goal = "9";
 
                     String sqlInsert = List_DB_Make.SQL_INSERT +
                             " (" +
@@ -189,49 +184,25 @@ public class List_SelectGoal extends AppCompatActivity {
 
                     db.execSQL(sqlInsert) ;
 
-                    //json 파일 읽어와서 분석하기
+                    // JSON 생성
+                    JSONObject list = new JSONObject();     // JSON 오브젝트
 
-                    //assets폴더의 파일을 가져오기 위해
-                    //창고관리자(AssetManager) 얻어오기
-                    AssetManager assetManager= getAssets();
-
-                    //assets/ test.json 파일 읽기 위한 InputStream
                     try {
-                        InputStream is= assetManager.open("jsons/test.json");
-                        InputStreamReader isr= new InputStreamReader(is);
-                        BufferedReader reader= new BufferedReader(isr);
 
-                        StringBuffer buffer= new StringBuffer();
-                        String line= reader.readLine();
-                        while (line!=null){
-                            buffer.append(line+"\n");
-                            line=reader.readLine();
-                        }
+                        list.put("title", title);    // list 부분 생성 시작
+                        list.put("list_term_start", list_term_start);
+                        list.put("list_term_end", list_term_end);
+                        list.put("list_time_start", list_time_start);
+                        list.put("list_time_end", list_time_end);
+                        list.put("list_level", list_level);
+                        list.put("list_category", list_category);
+                        list.put("list_detail", list_detail);
+                        list.put("list_degree_goal", list_degree_goal);    // list 부분 생성 완료
 
-                        String jsonData= buffer.toString();
-
-                        //읽어온 json문자열 확인
-                        //tv.setText(jsonData);
-
-                        //json 데이터가 []로 시작하는 배열일때..
-                        JSONArray jsonArray= new JSONArray(jsonData);
-
-                        String s="";
-
-                        for(int i=0; i<jsonArray.length();i++){
-                            JSONObject jo=jsonArray.getJSONObject(i);
-
-                            String name= jo.getString("name");
-                            String msg= jo.getString("msg");
-                            JSONObject flag=jo.getJSONObject("flag");
-                            int aa= flag.getInt("aa");
-                            int bb= flag.getInt("bb");
-
-                            s += name+" : "+msg+"==>"+aa+","+bb+"\n";
-                        }
-                        Toast.makeText(List_SelectGoal.this, s, Toast.LENGTH_SHORT).show();
-
-                    } catch (IOException e) {e.printStackTrace();} catch (JSONException e) {e.printStackTrace(); }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Log.e("json", "json : " + list.toString());
 
                     Intent intent = new Intent(getApplication(),List.class);
                     setResult(Activity.RESULT_OK,intent);

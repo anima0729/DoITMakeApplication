@@ -1,4 +1,0 @@
-[
-  {"name":  "sam","msg":  "Hello world", "flag": {"aa":  10, "bb":  20}},
-  {"name":  "robin","msg":  "Nice to meet you", "flag": {"aa": 100,"bb": 200}}
-]
