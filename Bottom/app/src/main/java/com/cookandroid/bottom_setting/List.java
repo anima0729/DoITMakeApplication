@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -47,7 +46,7 @@ public class List extends Fragment {
 
         final ListView listview ;
         final List_CustomChoiceListViewAdapter adapter;
-        final Intent intent = new Intent(getActivity(),SelectGoal.class);
+        final Intent intent = new Intent(getActivity(), List_SelectGoal.class);
         // 체크박스
         boolean mClick = false;
 

@@ -8,6 +8,7 @@ import android.app.TimePickerDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -24,13 +25,21 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 import static com.cookandroid.bottom_setting.MainActivity.List_DB;
 
-public class SelectGoal extends AppCompatActivity {
+public class List_SelectGoal extends AppCompatActivity {
 
 
     Calendar myCalendar1 = Calendar.getInstance(); //끝나는 날짜
@@ -61,7 +70,7 @@ public class SelectGoal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.selectgoal);
+        setContentView(R.layout.list_selectgoal);
         final EditText goal=(EditText)findViewById(R.id.goal);
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch switch1 = (Switch) findViewById(R.id.switch2);
         final TextView starttime = (TextView) findViewById(R.id.starttime);
@@ -81,7 +90,7 @@ public class SelectGoal extends AppCompatActivity {
         editstartdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(SelectGoal.this, myDatePicker1, myCalendar1.get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH), myCalendar1.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(List_SelectGoal.this, myDatePicker1, myCalendar1.get(Calendar.YEAR), myCalendar1.get(Calendar.MONTH), myCalendar1.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -89,7 +98,7 @@ public class SelectGoal extends AppCompatActivity {
         editenddate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(SelectGoal.this, myDatePicker2, myCalendar2.get(Calendar.YEAR), myCalendar2.get(Calendar.MONTH), myCalendar2.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(List_SelectGoal.this, myDatePicker2, myCalendar2.get(Calendar.YEAR), myCalendar2.get(Calendar.MONTH), myCalendar2.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -100,7 +109,7 @@ public class SelectGoal extends AppCompatActivity {
                 Calendar mcurrentTime = Calendar.getInstance();
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker = new TimePickerDialog(SelectGoal.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog mTimePicker = new TimePickerDialog(List_SelectGoal.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         String state = "AM";
@@ -124,7 +133,7 @@ public class SelectGoal extends AppCompatActivity {
                 Calendar mcurrentTime = Calendar.getInstance();
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
-                TimePickerDialog mTimePicker = new TimePickerDialog(SelectGoal.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog mTimePicker = new TimePickerDialog(List_SelectGoal.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         String state = "AM";
@@ -179,6 +188,50 @@ public class SelectGoal extends AppCompatActivity {
                             ")" ;
 
                     db.execSQL(sqlInsert) ;
+
+                    //json 파일 읽어와서 분석하기
+
+                    //assets폴더의 파일을 가져오기 위해
+                    //창고관리자(AssetManager) 얻어오기
+                    AssetManager assetManager= getAssets();
+
+                    //assets/ test.json 파일 읽기 위한 InputStream
+                    try {
+                        InputStream is= assetManager.open("jsons/test.json");
+                        InputStreamReader isr= new InputStreamReader(is);
+                        BufferedReader reader= new BufferedReader(isr);
+
+                        StringBuffer buffer= new StringBuffer();
+                        String line= reader.readLine();
+                        while (line!=null){
+                            buffer.append(line+"\n");
+                            line=reader.readLine();
+                        }
+
+                        String jsonData= buffer.toString();
+
+                        //읽어온 json문자열 확인
+                        //tv.setText(jsonData);
+
+                        //json 데이터가 []로 시작하는 배열일때..
+                        JSONArray jsonArray= new JSONArray(jsonData);
+
+                        String s="";
+
+                        for(int i=0; i<jsonArray.length();i++){
+                            JSONObject jo=jsonArray.getJSONObject(i);
+
+                            String name= jo.getString("name");
+                            String msg= jo.getString("msg");
+                            JSONObject flag=jo.getJSONObject("flag");
+                            int aa= flag.getInt("aa");
+                            int bb= flag.getInt("bb");
+
+                            s += name+" : "+msg+"==>"+aa+","+bb+"\n";
+                        }
+                        Toast.makeText(List_SelectGoal.this, s, Toast.LENGTH_SHORT).show();
+
+                    } catch (IOException e) {e.printStackTrace();} catch (JSONException e) {e.printStackTrace(); }
 
                     Intent intent = new Intent(getApplication(),List.class);
                     setResult(Activity.RESULT_OK,intent);
