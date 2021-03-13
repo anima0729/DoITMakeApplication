@@ -1,6 +1,7 @@
 package com.cookandroid.bottom_setting;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,19 +15,38 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.nhn.android.naverlogin.OAuthLogin;
+import com.nhn.android.naverlogin.data.OAuthLoginState;
+
+import org.json.JSONException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 import static com.cookandroid.bottom_setting.MainActivity.List_DB;
 
 public class List extends Fragment {
+
+    // Bundle에서 ID정보 받아오기
+    String id;
+    String find;
+
+    // ID & List_ID 받아오기
+    String[] List_ID;
+    int length;
+
+    //List_ID로 List Data 받아오기
+    selectDatabase_list data_list[];
+    String find_list[];
 
 
     @Override
@@ -43,6 +63,53 @@ public class List extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list, container, false);
+
+        Bundle bundle = getArguments();
+
+        String IP = getString(R.string.web_IP);
+
+        // Naver 로그인인 경우
+        if (bundle != null) {
+            id = bundle.getString("id");
+
+            // 이용자의 고유 Naver ID 값을 이용해 list_id 정보 불러오기
+            selectDatabase_list_id list_id = new selectDatabase_list_id(IP, null, getContext());
+            try {
+                find = list_id.execute(id).get();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            // List ID JSON Parsing
+            try {
+                Translate_JSON_List_ID user_list_id = new Translate_JSON_List_ID(find);
+                List_ID = user_list_id.getList_ID();
+                length = user_list_id.getlength();
+            } catch (JSONException e) {
+                e.printStackTrace();
+                List_ID = null;
+            }
+            // List ID로 배열로 List Data 정보 불러오기
+            if (List_ID != null) {
+                for (int i = 0; i < length; i++) {
+                    data_list[i] = new selectDatabase_list(IP, null, getContext());
+                    try {
+                        find_list[i] = data_list[i].execute(List_ID[i]).get();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                // TODO: List Data JSON Parsing
+
+
+            }
+
+        }
+
+
 
         final ListView listview ;
         final List_CustomChoiceListViewAdapter adapter;
