@@ -25,8 +25,12 @@ public class Translate_JSON_List_ID {
 
         info = info.replace("[", "");
         info = info.replace("]", "");
+        info = info.replace("},", "}, ");
         info_array = info.split(", ");
         length = info_array.length;
+        cleanObject = new JSONObject[length];
+        ID = new String[length];
+        List_ID = new String[length];
         for (int i = 0; i < length; i++) {
             cleanObject[i] = new JSONObject(info_array[i]);
             ID[i] = cleanObject[i].getString("id");

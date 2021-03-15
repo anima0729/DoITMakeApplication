@@ -1,7 +1,6 @@
 package com.cookandroid.bottom_setting;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,15 +14,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.nhn.android.naverlogin.OAuthLogin;
-import com.nhn.android.naverlogin.data.OAuthLoginState;
 
 import org.json.JSONException;
 
@@ -47,7 +42,15 @@ public class List extends Fragment {
     //List_ID로 List Data 받아오기
     selectDatabase_list data_list[];
     String find_list[];
-
+    String Title[];
+    String List_Term_Start[];
+    String List_Term_End[];
+    String List_Time_Start[];
+    String List_Time_End[];
+    String List_Level[];
+    String List_Category[];
+    String List_Detail[];
+    String List_Degree_Goal[];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,20 @@ public class List extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list, container, false);
+
+        final ListView listview ;
+        final List_CustomChoiceListViewAdapter adapter;
+        final Intent intent = new Intent(getActivity(), List_SelectGoal.class);
+        // 체크박스
+        boolean mClick = false;
+
+        // Adapter 생성
+        adapter = new List_CustomChoiceListViewAdapter() ;
+
+        // 리스트뷰 참조 및 Adapter달기
+        listview = (ListView) view.findViewById(R.id.listview1);
+        listview.setAdapter(adapter);
+
 
         Bundle bundle = getArguments();
 
@@ -89,9 +106,22 @@ public class List extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
                 List_ID = null;
+                length = 0;
             }
             // List ID로 배열로 List Data 정보 불러오기
             if (List_ID != null) {
+                data_list = new selectDatabase_list[length];
+                find_list = new String[length];
+                Title = new String[length];
+                List_Term_Start = new String[length];
+                List_Term_End = new String[length];
+                List_Time_Start = new String[length];
+                List_Time_End = new String[length];
+                List_Level = new String[length];
+                List_Category = new String[length];
+                List_Detail = new String[length];
+                List_Degree_Goal = new String[length];
+                Translate_JSON_List user_list_data[] = new Translate_JSON_List[length];
                 for (int i = 0; i < length; i++) {
                     data_list[i] = new selectDatabase_list(IP, null, getContext());
                     try {
@@ -101,30 +131,65 @@ public class List extends Fragment {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                }
-                // TODO: List Data JSON Parsing
+                    try {
+                        user_list_data[i] = new Translate_JSON_List(find_list[i]);
+                        Title[i] = user_list_data[i].getTitle();
+                        List_Term_Start[i] = user_list_data[i].getList_Term_Start();
+                        List_Term_End[i] = user_list_data[i].getList_Term_End();
+                        List_Time_Start[i] = user_list_data[i].getList_Time_Start();
+                        List_Time_End[i] = user_list_data[i].getList_Time_End();
+                        List_Level[i] = user_list_data[i].getList_Level();
+                        List_Category[i] = user_list_data[i].getList_Category();
+                        List_Detail[i] = user_list_data[i].getList_Detail();
+                        List_Degree_Goal[i] = user_list_data[i].getList_Degree_Goal();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Title[i] = "";
+                        List_Term_Start[i] = "";
+                        List_Term_End[i] = "";
+                        List_Time_Start[i] = "";
+                        List_Time_End[i] = "";
+                        List_Level[i] = "";
+                        List_Category[i] = "";
+                        List_Detail[i] = "";
+                        List_Degree_Goal[i] = "";
+                    }
+                    float total = 0;
 
+                    String strFormat = "yyyy/MM/dd";
+                    Date date = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat(strFormat);
+                    String strToday = sdf.format(date);
+                    {
+                        try {
+                            Date startDate = sdf.parse(List_Term_Start[i]);
+                            Date endDate = sdf.parse(List_Term_End[i]);
+                            Date today = sdf.parse(strToday);
+
+                            float diffDay = (startDate.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
+                            float nowDay = (today.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
+                            total = (nowDay / diffDay) * 100;
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    String per = (100 - (int) total) + "%";
+
+                    //Title, 시작기간, 끝난 기간, 디테일 , 퍼센트
+                    if (total <= 100 && total >= 0) {
+                        adapter.addItem(Title[i], List_Term_Start[i], List_Term_End[i], List_Detail[i], per);
+                    }
+                }
 
             }
 
         }
 
-
-
-        final ListView listview ;
-        final List_CustomChoiceListViewAdapter adapter;
-        final Intent intent = new Intent(getActivity(), List_SelectGoal.class);
-        // 체크박스
-        boolean mClick = false;
-
-        // Adapter 생성
-        adapter = new List_CustomChoiceListViewAdapter() ;
-
-        // 리스트뷰 참조 및 Adapter달기
-        listview = (ListView) view.findViewById(R.id.listview1);
-        listview.setAdapter(adapter);
-
-        load_values(adapter);
+        // Naver Login이 아닌 경우 DB에서 가져오기
+        else {
+            load_values(adapter);
+        }
 
         // add button에 대한 이벤트 처리. (미완성)
         ImageButton addButton = (ImageButton) view.findViewById(R.id.add);
