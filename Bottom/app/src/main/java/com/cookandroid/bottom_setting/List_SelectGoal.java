@@ -25,17 +25,30 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import static com.cookandroid.bottom_setting.MainActivity.List_DB;
 
 public class List_SelectGoal extends AppCompatActivity {
 
+    private DatabaseReference databaseReference;
+    private String id;
+    private String title1;
+    private String term_start;
+    private String term_end;
+    private String degree;
 
     Calendar myCalendar1 = Calendar.getInstance(); //끝나는 날짜
     //똑같이 날짜 받아오기
@@ -78,6 +91,7 @@ public class List_SelectGoal extends AppCompatActivity {
         TextView textView=(TextView)findViewById(R.id.textView2);
         Button save=(Button)findViewById(R.id.save);
         Button cancle=(Button)findViewById(R.id.cancel);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -157,6 +171,20 @@ public class List_SelectGoal extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"목표를 입력하지 않았습니다.",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null){
+                        id=user.getEmail();
+                    }
+                    else
+                        id="null";
+
+
+                    title1 = goal.getText().toString();
+                    term_start = editstartdate.getText().toString();
+                    term_end = editenddate.getText().toString();
+                    degree = "0%";
+                    writeNewPost(true);
+
                     SQLiteDatabase db = List_DB.getWritableDatabase();
 
                     String title = goal.getText().toString();
@@ -208,6 +236,8 @@ public class List_SelectGoal extends AppCompatActivity {
                     setResult(Activity.RESULT_OK,intent);
 
                     db.close();
+
+
 
                     finish();
                 }
@@ -300,5 +330,18 @@ public class List_SelectGoal extends AppCompatActivity {
                 break;
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void writeNewPost(boolean add) {
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        Map<String, Object> data = null;
+
+        if(add){
+            FirebasePost_data user = new FirebasePost_data(id,title1,term_start,term_end,degree);
+            data = user.toMap();
+        }
+        childUpdates.put("/goal_data/" + title1, data);
+        databaseReference.updateChildren(childUpdates);
     }
 }
