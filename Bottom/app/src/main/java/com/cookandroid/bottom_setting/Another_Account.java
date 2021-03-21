@@ -3,6 +3,7 @@ package com.cookandroid.bottom_setting;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -74,6 +75,14 @@ public class Another_Account extends AppCompatActivity {
                         if (firebaseAuth.getCurrentUser() != null) {
                             Intent find_password = new Intent(Another_Account.this, Another_Account_Find_Password.class);
                             startActivity(find_password);
+                        } else if (OAuthLoginState.OK.equals(OAuthLogin.getInstance().getState(getApplicationContext()))){
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            Uri uri = Uri.parse("http://www.naver.com");
+                            intent.setData(uri);
+                            startActivity(intent);
+                            Toast.makeText(Another_Account.this, " 네이버로 이동합니다.",Toast.LENGTH_LONG).show();
+                            finish();
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                         }
                         break;
 
@@ -94,8 +103,7 @@ public class Another_Account extends AppCompatActivity {
 
                                         }
                                     });
-                                }
-                                else if (OAuthLoginState.OK.equals(OAuthLogin.getInstance().getState(getApplicationContext()))){
+                                } else if (OAuthLoginState.OK.equals(OAuthLogin.getInstance().getState(getApplicationContext()))){
                                     OAuthLogin.getInstance().logoutAndDeleteToken(getApplicationContext());
                                     Toast.makeText(Another_Account.this, " 계정이 삭제되었습니다.",Toast.LENGTH_LONG).show();
                                     finish();
