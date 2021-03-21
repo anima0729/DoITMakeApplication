@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,6 +32,9 @@ public class Another_Account extends AppCompatActivity {
     private FirebaseAuth firebaseAuth ;
     ProgressDialog progressDialog;
     EditText email;
+
+    int GenderSelectItem;
+    android.app.AlertDialog.Builder GenderDlg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,14 +64,41 @@ public class Another_Account extends AppCompatActivity {
 
                     // 닉네임 변경
                     case 1:
-                        // Intent set_profile_nickname = new Intent(Another_Account.this, Another_Account_Set_Nickname.class);
-                        // startActivity(set_profile_nickname);
+                        Intent set_profile_nickname = new Intent(Another_Account.this, Another_Account_Set_Nickname.class);
+                        startActivity(set_profile_nickname);
+                        finish();
                         break;
 
                     // 성별 변경
                     case 2:
-                        // Intent set_profile_gender = new Intent(Another_Account.this, Another_Account_Set_Gender.class);
-                        // startActivity(set_profile_gender);
+                        final CharSequence[] ArrGenderDlg = {"남자", "여자"};
+
+                        GenderDlg = new android.app.AlertDialog.Builder(Another_Account.this, android.R.style.Theme_DeviceDefault_Light_Dialog_Alert);
+
+                        // 성별 다이얼로그 창 설정
+                        GenderDlg.setTitle(getString(R.string.SelectGender))
+                                .setSingleChoiceItems(ArrGenderDlg, -1, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        GenderSelectItem = which;
+                                    }
+                                })
+                                .setNeutralButton(getString(R.string.Select), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if(GenderSelectItem == 0) {
+                                            Toast.makeText(getApplicationContext(), "M", Toast.LENGTH_LONG).show();
+                                            Another.setGender("M");
+
+                                        }
+                                        else if(GenderSelectItem == 1) {
+                                            Toast.makeText(getApplicationContext(), "F", Toast.LENGTH_LONG).show();
+                                            Another.setGender("F");
+                                        }
+                                    }
+                                })
+                                .setCancelable(true)
+                                .show();
                         break;
 
                     // 비밀번호 재설정
@@ -75,6 +106,7 @@ public class Another_Account extends AppCompatActivity {
                         if (firebaseAuth.getCurrentUser() != null) {
                             Intent find_password = new Intent(Another_Account.this, Another_Account_Find_Password.class);
                             startActivity(find_password);
+                            finish();
                         } else if (OAuthLoginState.OK.equals(OAuthLogin.getInstance().getState(getApplicationContext()))){
                             Intent intent = new Intent(Intent.ACTION_VIEW);
                             Uri uri = Uri.parse("http://www.naver.com");
