@@ -25,8 +25,8 @@ public class Another extends Fragment implements View.OnClickListener{
     String find = "";
 
     // Profile Info
-    String nickname = null;
-    String gender = null;
+    public static String nickname = null;
+    public static String gender = null;
 
     public static Another newInstance() {
         return new Another();
@@ -92,6 +92,14 @@ public class Another extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
+    }
+
+    public static void setGender (String newGender){
+        gender = newGender;
+    }
+
+    public static void setNickname (String newNickname){
+        nickname = newNickname;
     }
 
     private void setChildFragment(Fragment child) {
