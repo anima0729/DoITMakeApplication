@@ -261,6 +261,7 @@ public class List_SelectGoal extends AppCompatActivity {
                             String spare = naver_id + "0000";
                             final_list_id = Long.parseLong(spare);
                         }
+                        final_list_id = Long.parseLong(naver_list_count);
                         final_list_id = final_list_id + 1;
                         insert_final_list_id = Long.toString(final_list_id);
                         // list_id upload
