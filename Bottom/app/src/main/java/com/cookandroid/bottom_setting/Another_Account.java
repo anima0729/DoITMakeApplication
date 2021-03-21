@@ -66,7 +66,6 @@ public class Another_Account extends AppCompatActivity {
                     case 1:
                         Intent set_profile_nickname = new Intent(Another_Account.this, Another_Account_Set_Nickname.class);
                         startActivity(set_profile_nickname);
-                        finish();
                         break;
 
                     // 성별 변경
@@ -113,8 +112,6 @@ public class Another_Account extends AppCompatActivity {
                             intent.setData(uri);
                             startActivity(intent);
                             Toast.makeText(Another_Account.this, " 네이버로 이동합니다.",Toast.LENGTH_LONG).show();
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                         }
                         break;
 
