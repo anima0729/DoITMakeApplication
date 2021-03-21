@@ -43,12 +43,20 @@ import static com.cookandroid.bottom_setting.MainActivity.List_DB;
 
 public class List_SelectGoal extends AppCompatActivity {
 
+    // 데이터 베이스 저장
     private DatabaseReference databaseReference;
     private String id;
     private String title1;
     private String term_start;
     private String term_end;
     private String degree;
+
+
+    // 네이버 로그인 정보
+    private String naver_id;
+    private String naver_list_count;
+    private long final_list_id;
+    private String insert_final_list_id;
 
     Calendar myCalendar1 = Calendar.getInstance(); //끝나는 날짜
     //똑같이 날짜 받아오기
@@ -93,7 +101,10 @@ public class List_SelectGoal extends AppCompatActivity {
         Button cancle=(Button)findViewById(R.id.cancel);
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-
+        // intent로 정보 받아 naver 로그인인지 확인
+        Intent intent_main = new Intent(this.getIntent());
+        naver_id = intent_main.getStringExtra("id");
+        naver_list_count = intent_main.getStringExtra("final_list_id");
 
         //시작 날짜 클릭 시
         editstartdate.setOnClickListener(new View.OnClickListener() {
@@ -159,31 +170,37 @@ public class List_SelectGoal extends AppCompatActivity {
                 mTimePicker.show();
             }
         });
+
+
         //목표 입력 안 한 경우 토스트 메세지 출력
         //저장 버튼 눌렀을 때
-
-
         save.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
                 String g=goal.getText().toString();
                 if ((g.equals(""))){
                     Toast.makeText(getApplicationContext(),"목표를 입력하지 않았습니다.",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    // 파이어베이스로 로그인 했을 경우
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if (user != null){
                         id=user.getEmail();
+                        title1 = goal.getText().toString();
+                        term_start = editstartdate.getText().toString();
+                        term_end = editenddate.getText().toString();
+                        degree = "0%";
+                        writeNewPost(true);
                     }
-                    else
-                        id="null";
-
-
-                    title1 = goal.getText().toString();
-                    term_start = editstartdate.getText().toString();
-                    term_end = editenddate.getText().toString();
-                    degree = "0%";
-                    writeNewPost(true);
+                    else {
+                        id = "null";
+                        title1 = goal.getText().toString();
+                        term_start = editstartdate.getText().toString();
+                        term_end = editenddate.getText().toString();
+                        degree = "0%";
+                        writeNewPost(true);
+                    }
 
                     SQLiteDatabase db = List_DB.getWritableDatabase();
 
@@ -232,12 +249,33 @@ public class List_SelectGoal extends AppCompatActivity {
                     }
                     Log.e("json", "list.json : " + list.toString());
 
+                    String insert_contents = list.toString();
+
+                    // 네이버로 로그인 했을 경우
+                    if (naver_id != null) {
+
+                        // Web Server 접속 IP
+                        String IP = getString(R.string.web_IP);
+
+                        if (naver_list_count == null) {
+                            String spare = naver_id + "0000";
+                            final_list_id = Long.parseLong(spare);
+                        }
+                        final_list_id = final_list_id + 1;
+                        insert_final_list_id = Long.toString(final_list_id);
+                        // list_id upload
+                        InsertData_list_id insert_data_list_id = new InsertData_list_id(IP, null, getApplicationContext());
+                        insert_data_list_id.execute(naver_id, insert_final_list_id);
+
+                        // list contents upload
+                        InsertData_list insert_data_list = new InsertData_list(IP, null, getApplicationContext());
+                        insert_data_list.execute(insert_final_list_id, insert_contents);
+                    }
+
                     Intent intent = new Intent(getApplication(),List.class);
                     setResult(Activity.RESULT_OK,intent);
 
                     db.close();
-
-
 
                     finish();
                 }
@@ -250,8 +288,6 @@ public class List_SelectGoal extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
 
         //스위치
