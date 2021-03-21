@@ -34,11 +34,9 @@ public class List extends Fragment {
     // Bundle에서 ID정보 받아오기
     String id;
     String find;
-    Bundle bundle;
 
     // ID & List_ID 받아오기
     String[] List_ID;
-    String final_list_id;
     int length;
 
     //List_ID로 List Data 받아오기
@@ -84,7 +82,7 @@ public class List extends Fragment {
         listview.setAdapter(adapter);
 
 
-        bundle = getArguments();
+        Bundle bundle = getArguments();
 
         String IP = getString(R.string.web_IP);
 
@@ -103,11 +101,9 @@ public class List extends Fragment {
             }
             // List ID JSON Parsing
             try {
-                if (!find.equals("null")) {
-                    Translate_JSON_List_ID user_list_id = new Translate_JSON_List_ID(find);
-                    List_ID = user_list_id.getList_ID();
-                    length = user_list_id.getlength();
-                }
+                Translate_JSON_List_ID user_list_id = new Translate_JSON_List_ID(find);
+                List_ID = user_list_id.getList_ID();
+                length = user_list_id.getlength();
             } catch (JSONException e) {
                 e.printStackTrace();
                 List_ID = null;
@@ -115,7 +111,6 @@ public class List extends Fragment {
             }
             // List ID로 배열로 List Data 정보 불러오기
             if (List_ID != null) {
-                final_list_id = List_ID[length-1];
                 data_list = new selectDatabase_list[length];
                 find_list = new String[length];
                 Title = new String[length];
@@ -189,9 +184,6 @@ public class List extends Fragment {
                 }
 
             }
-            //intent로 Naver id 정보를 넘겨주어 네이보 로그인임을 알림
-            intent.putExtra("id", id);
-            intent.putExtra("final_list_id", final_list_id);
 
         }
 
