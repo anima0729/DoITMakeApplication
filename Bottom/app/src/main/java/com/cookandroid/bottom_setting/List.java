@@ -221,20 +221,32 @@ public class List extends Fragment {
                 SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
                 SQLiteDatabase db = List_DB.getWritableDatabase();
                 int count = adapter.getCount() ;
-                //adapter.it
-                for (int i = count-1; i >= 0; i--) {
-                    if (checkedItems.get(i)) {
-                        //adapter.getItem(i).getGoal();
-                        String SQLdelete="DELETE FROM List_20_11_22 WHERE TITLE = '"+adapter.getItem(i).getGoal()+"'";
-                        Log.d("index",adapter.getItem(i).getGoal());
-                        db.execSQL(SQLdelete);
 
-                        //if(listview.isItemChecked(i);
+                // Naver Login일 경우 웹서버와 통신하여 삭제 처리
+                if (bundle != null) {
+                    for (int i = 0; i < count; i++) {
+                        if (checkedItems.get(i)) {
 
-                        //adapter.removeItem(1);
+                        }
                     }
                 }
-                db.close();
+                // Naver Login 이외의 경우 삭제 처리
+                else {
+                    //adapter.it
+                    for (int i = count - 1; i >= 0; i--) {
+                        if (checkedItems.get(i)) {
+                            //adapter.getItem(i).getGoal();
+                            String SQLdelete = "DELETE FROM List_20_11_22 WHERE TITLE = '" + adapter.getItem(i).getGoal() + "'";
+                            Log.d("index", adapter.getItem(i).getGoal());
+                            db.execSQL(SQLdelete);
+
+                            //if(listview.isItemChecked(i);
+
+                            //adapter.removeItem(1);
+                        }
+                    }
+                    db.close();
+                }
                 // 모든 선택 상태 초기화.
                 listview.clearChoices() ;
                 Refresh_Fragment();
