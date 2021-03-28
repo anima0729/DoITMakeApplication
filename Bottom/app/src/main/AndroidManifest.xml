@@ -3,7 +3,7 @@
     package="com.cookandroid.bottom_setting">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <!-- camera, gallery -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -38,6 +38,16 @@
         <activity android:name=".Another_Account_Find_Password"/>
         <activity android:name=".Another_Account_Set_Nickname"/>
         <activity android:name=".Another_Account_Set_Photo"/>
+        <provider
+            android:authorities="com.example.bottom"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
