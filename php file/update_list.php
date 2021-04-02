@@ -8,12 +8,13 @@ include('navercon.php');
 
 //POST 값을 읽어온다.
 $list_id=isset($_POST['list_id']) ? $_POST['list_id'] : '';
+$list_contents=isset($_POST['list_contents']) ? $_POST['list_contents'] : '';
 $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
 
 
 if ($list_id!= "" ){ 
 
-    $sql="DELETE FROM naver_list_id WHERE list_id = '$list_id'";
+    $sql="UPDATE naver_list SET list_contents='$list_contents' WHERE list_id='$list_id'";
     $stmt = $con->prepare($sql);
     $stmt->execute();
  
@@ -25,7 +26,7 @@ if ($list_id!= "" ){
     }
 }
 else {
-    echo "삭제할 list_id를 입력하세요 ";
+    echo "변경할 list_id를 입력하세요 ";
 }
 
 ?>
@@ -44,6 +45,7 @@ if (!$android){
    
       <form action="<?php $_PHP_SELF ?>" method="POST">
          list_id: <input type = "text" name = "list_id" />
+         list_contents: <input type = "text" name = "list_contents" />
          <input type = "submit" />
       </form>
    

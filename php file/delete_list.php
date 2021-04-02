@@ -25,7 +25,7 @@ if ($list_id!= "" ){
     }
 }
 else {
-    echo "검색할 list_id를 입력하세요 ";
+    echo " 삭제할 list_id를 입력하세요 ";
 }
 
 ?>
