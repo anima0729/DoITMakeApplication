@@ -1,5 +1,6 @@
 package com.cookandroid.bottom_setting;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,8 @@ import java.util.concurrent.ExecutionException;
 
 public class Another extends Fragment implements View.OnClickListener{
 
-    ImageView ProfilePhoto;
+    public static ImageView ProfilePhoto;
+    public static Drawable photo;
 
     // ProfileBox 텍스트 뷰
     TextView ProfileBox;
@@ -88,7 +90,7 @@ public class Another extends Fragment implements View.OnClickListener{
 
         // ProfilePhoto에 Profile 정보 표시
         ProfilePhoto = fv.findViewById(R.id.imageView);
-        // ProfilePhoto.setBackground(getResources().getDrawable(R.drawable.o));
+        ProfilePhoto.setImageDrawable(photo);
 
         // ProfileBox에 Profile 정보 표시
         ProfileBox = fv.findViewById(R.id.textView);
@@ -98,9 +100,9 @@ public class Another extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v) { }
 
-    }
+    public static void setPhoto (Drawable newProfilePhoto){ photo = newProfilePhoto; }
 
     public static void setGender (String newGender){
         gender = newGender;

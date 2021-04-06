@@ -45,6 +45,11 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
 
     private File tempFile;
 
+    ImageView user_image;
+    Button btnCamera;
+    Button btnUploadPhoto;
+    Button btnSave;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,24 +57,34 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
 
         tedPermission();
 
-        findViewById(R.id.btnUploadPhoto).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 권한 허용에 동의하지 않았을 경우 토스트를 띄웁니다.
-                if(isPermission) goToAlbum();
-                else Toast.makeText(view.getContext(), "사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
-            }
-        });
+        btnCamera = (Button) findViewById(R.id.btnCamera);
+        btnUploadPhoto = (Button) findViewById(R.id.btnUploadPhoto);
+        btnSave = (Button) findViewById(R.id.btnSave);
 
-        findViewById(R.id.btnCamera).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnCamera.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
                 // 권한 허용에 동의하지 않았을 경우 토스트를 띄웁니다.
                 if(isPermission)  takePhoto();
-                else Toast.makeText(view.getContext(), "사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
+                else Toast.makeText(v.getContext(), "사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
             }
         });
 
+        btnUploadPhoto.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                // 권한 허용에 동의하지 않았을 경우 토스트를 띄웁니다.
+                if(isPermission) goToAlbum();
+                else Toast.makeText(v.getContext(), "사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        user_image = findViewById(R.id.user_image);
+        btnSave.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                Another.setPhoto(user_image.getDrawable());
+                Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_LONG).show();
+                user_image.setImageDrawable(getResources().getDrawable(R.drawable.id));
+            }
+        });
     }
 
     @Override
@@ -189,8 +204,6 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
      *  tempFile 을 bitmap 으로 변환 후 ImageView 에 설정한다.
      */
     private void setImage() {
-
-        ImageView user_image = findViewById(R.id.user_image);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
