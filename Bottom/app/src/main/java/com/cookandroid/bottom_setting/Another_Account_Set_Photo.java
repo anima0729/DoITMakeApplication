@@ -32,10 +32,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Another_Account_Set_Photo extends AppCompatActivity {
 
-    private static final String TAG = "blackjin";
+    private static final String TAG = "shshshshsh";
 
     private Boolean isPermission = true;
 
@@ -169,12 +170,12 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
      */
     private File createImageFile() throws IOException {
 
-        // 이미지 파일 이름 ( blackJin_{시간}_ )
+        // 이미지 파일 이름 ( photo_{시간}_ )
         String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
-        String imageFileName = "blackJin_" + timeStamp + "_";
+        String imageFileName = "photo_" + timeStamp + "_";
 
-        // 이미지가 저장될 폴더 이름 ( blackJin )
-        File storageDir = new File(Environment.getExternalStorageDirectory() + "/blackJin/");
+        // 이미지가 저장될 폴더 이름 ( Photo )
+        File storageDir = new File(Environment.getExternalStorageDirectory() + "/Photo/");
         if (!storageDir.exists()) storageDir.mkdirs();
 
         // 파일 생성
@@ -189,13 +190,13 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
      */
     private void setImage() {
 
-        ImageView imageView = findViewById(R.id.imageView);
+        ImageView user_image = findViewById(R.id.user_image);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap originalBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(), options);
         Log.d(TAG, "setImage : " + tempFile.getAbsolutePath());
 
-        imageView.setImageBitmap(originalBm);
+        user_image.setImageBitmap(originalBm);
 
         /**
          *  tempFile 사용 후 null 처리를 해줘야 합니다.
@@ -219,7 +220,7 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
             }
 
             @Override
-            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+            public void onPermissionDenied(List<String> deniedPermissions) {
                 // 권한 요청 실패
                 isPermission = false;
             }

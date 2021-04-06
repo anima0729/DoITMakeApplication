@@ -16,7 +16,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher_foreground"
         android:supportsRtl="true"
-        android:theme="@style/Basic">
+        android:theme="@style/Basic"
+        android:requestLegacyExternalStorage="true">
         <activity android:name=".MainActivity"/>
         <activity android:name=".LoginActivity">
             <intent-filter>
