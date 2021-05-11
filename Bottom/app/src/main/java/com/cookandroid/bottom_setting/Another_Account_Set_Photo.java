@@ -41,12 +41,10 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
     private Boolean isPermission = true;
 
     private static final int PICK_FROM_ALBUM = 1;
-    private static final int PICK_FROM_CAMERA = 2;
 
     private File tempFile;
 
     ImageView user_image;
-    Button btnCamera;
     Button btnUploadPhoto;
     Button btnSave;
 
@@ -57,17 +55,8 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
 
         tedPermission();
 
-        btnCamera = (Button) findViewById(R.id.btnCamera);
         btnUploadPhoto = (Button) findViewById(R.id.btnUploadPhoto);
         btnSave = (Button) findViewById(R.id.btnSave);
-
-        btnCamera.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                // 권한 허용에 동의하지 않았을 경우 토스트를 띄웁니다.
-                if(isPermission)  takePhoto();
-                else Toast.makeText(v.getContext(), "사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
-            }
-        });
 
         btnUploadPhoto.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -140,10 +129,6 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
 
             setImage();
 
-        } else if (requestCode == PICK_FROM_CAMERA) {
-
-            setImage();
-
         }
     }
 
@@ -155,49 +140,6 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent, PICK_FROM_ALBUM);
-    }
-
-
-    /**
-     *  카메라에서 이미지 가져오기
-     */
-    private void takePhoto() {
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        try {
-            tempFile = createImageFile();
-        } catch (IOException e) {
-            Toast.makeText(this, "이미지 처리 오류! 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
-            finish();
-            e.printStackTrace();
-        }
-        if (tempFile != null) {
-
-            Uri photoUri = Uri.fromFile(tempFile);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-            startActivityForResult(intent, PICK_FROM_CAMERA);
-        }
-    }
-
-    /**
-     *  폴더 및 파일 만들기
-     */
-    private File createImageFile() throws IOException {
-
-        // 이미지 파일 이름 ( photo_{시간}_ )
-        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
-        String imageFileName = "photo_" + timeStamp + "_";
-
-        // 이미지가 저장될 폴더 이름 ( Photo )
-        File storageDir = new File(Environment.getExternalStorageDirectory() + "/Photo/");
-        if (!storageDir.exists()) storageDir.mkdirs();
-
-        // 파일 생성
-        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
-        Log.d(TAG, "createImageFile : " + image.getAbsolutePath());
-
-        return image;
     }
 
     /**
