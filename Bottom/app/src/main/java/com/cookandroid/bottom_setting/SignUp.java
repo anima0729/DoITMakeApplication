@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.Exclude;
 
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +42,6 @@ public class SignUp extends AppCompatActivity {
     private String name;
     private String level;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -54,6 +54,7 @@ public class SignUp extends AppCompatActivity {
         editTextName = (EditText) findViewById(R.id.editText_name);
         buttonJoin = (Button) findViewById(R.id.btn_join);
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        //FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
 
 
         buttonJoin.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +120,7 @@ public class SignUp extends AppCompatActivity {
             FirebasePost user = new FirebasePost(id,name,password,level);
             postValues = user.toMap();
         }
-        childUpdates.put("/user/" + name, postValues);
+        childUpdates.put(name, postValues);
         databaseReference.updateChildren(childUpdates);
     }
 }

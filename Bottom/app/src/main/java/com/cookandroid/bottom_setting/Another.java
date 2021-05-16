@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import org.json.JSONException;
 import org.w3c.dom.Text;
 
@@ -82,6 +85,11 @@ public class Another extends Fragment implements View.OnClickListener{
                 nickname = null;
                 gender = null;
             }
+        }
+        else if (FirebaseAuth.getInstance().getCurrentUser() != null){
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            nickname = user.getEmail();
+            gender = "";
         }
 
         View fv = inflater.inflate(R.layout.another, container, false);
