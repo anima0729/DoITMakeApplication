@@ -215,11 +215,7 @@ public class List extends Fragment {
         ImageButton addButton = (ImageButton) view.findViewById(R.id.add);
         addButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-
-                Refresh_Fragment();
-                //startActivity(intent);//액티비티 띄우기
-
-                startActivityForResult(intent, 0);
+                startActivity(intent);//액티비티 띄우기
             }
         });
 

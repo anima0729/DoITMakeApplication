@@ -114,11 +114,8 @@ public class List_SelectGoal extends AppCompatActivity {
         Button save=(Button)findViewById(R.id.save);
         Button cancle=(Button)findViewById(R.id.cancel);
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-        if(user!=null){
-            uid=user.getEmail();
-        }
-        databaseReference = FirebaseDatabase.getInstance().getReference().child(uid);
-
+        uid=user.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child(uid).child("Data");
 
 
         // WebServer와 통신하여 list ID 확인
@@ -425,7 +422,7 @@ public class List_SelectGoal extends AppCompatActivity {
                     list_level,list_category,list_detail,list_degree_goal);
             data = user.toMap();
         }
-        childUpdates.put("/Data/" + title, data);
+        childUpdates.put(title, data);
         databaseReference.updateChildren(childUpdates);
     }
 }
