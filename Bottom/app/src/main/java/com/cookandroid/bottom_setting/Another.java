@@ -54,11 +54,10 @@ public class Another extends Fragment implements View.OnClickListener{
         String IP = getString(R.string.web_IP);
 
         Bundle bundle = getArguments();
-
+        // Naver 아이디로 로그인할 경우 실행
         if (bundle != null) {
             id = bundle.getString("id");
         }
-
         if (id != null) {
             // 이용자의 고유 Naver ID 값을 이용해 정보 불러오기
             selectDatabase FindDatabase = new selectDatabase(IP, null, getContext());
@@ -69,7 +68,6 @@ public class Another extends Fragment implements View.OnClickListener{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            // Naver 아이디로 로그인할 경우 실행
             if (!find.equals("null")) {
                 Translate_JSON_NaverProfile naverProfile = null;
                 try {
@@ -83,7 +81,6 @@ public class Another extends Fragment implements View.OnClickListener{
                     photo = getResources().getDrawable(R.drawable.id);
                 }
             }
-            // Naver 아이디로 로그인하는 경우가 아닐 경우
             else {
                 nickname = null;
                 gender = null;
