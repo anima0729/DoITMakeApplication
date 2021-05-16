@@ -94,6 +94,7 @@ public class Another extends Fragment implements View.OnClickListener{
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             nickname = user.getEmail();
             gender = "";
+            photo = getResources().getDrawable(R.drawable.id);
         }
 
         View fv = inflater.inflate(R.layout.another, container, false);
