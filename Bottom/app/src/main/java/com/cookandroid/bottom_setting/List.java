@@ -20,6 +20,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
+import static android.app.Activity.RESULT_OK;
 import static com.cookandroid.bottom_setting.MainActivity.List_DB;
 
 public class List extends Fragment {
@@ -47,6 +51,17 @@ public class List extends Fragment {
     String start;
     String end;
     String detail;
+    String GoalData="";klkl
+
+    String ad_title;
+    String ad_sd;
+    String ad_ed;
+    String ad_st;
+    String ad_et;
+    String ad_detail;
+    String ad_per;
+    float tt=0;
+    public static final int request_code=100;
 
     // ID & List_ID 받아오기
     String[] List_ID;
@@ -81,6 +96,7 @@ public class List extends Fragment {
         ft.detach(this).attach(this).commit();
     }
 
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Nullable
     @Override
@@ -95,6 +111,9 @@ public class List extends Fragment {
 
         // Adapter 생성
         adapter = new List_CustomChoiceListViewAdapter() ;
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        String uid=user.getUid();
+
 
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) view.findViewById(R.id.listview1);
@@ -208,14 +227,61 @@ public class List extends Fragment {
                 }
 
             }
-            else {
-                load_values(adapter);
+        }
+        else{
+            if (GoalData.equals("")){
+            }
+            else{
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(uid).child("Data").child(GoalData);
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot DS : snapshot.getChildren()){
+                            Firebase_Data FD = snapshot.getValue(Firebase_Data.class);
+                            ad_title=FD.title;
+                            ad_sd=FD.start_term;
+                            ad_ed=FD.end_term;
+                            //ad_st=FD.
+                            ad_detail=FD.detail;
+
+                        }
+
+                        String strFormat = "yyyy/MM/dd";
+                        Date date = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat(strFormat);
+                        String strToday = sdf.format(date);
+                        {
+                            try {
+                                Date startDate = sdf.parse(ad_sd);
+                                Date endDate = sdf.parse(ad_ed);
+                                Date today = sdf.parse(strToday);
+
+                                float diffDay = (startDate.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
+                                float nowDay = (today.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
+                                tt = (nowDay / diffDay) * 100;
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        ad_per = (100 - (int) tt) + "%";
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+
+                if (tt <= 100 && tt >= 0) {
+                    adapter.addItem(ad_title,ad_sd,ad_ed,ad_detail,ad_per);
+                }
+
             }
         }
         ImageButton addButton = (ImageButton) view.findViewById(R.id.add);
         addButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                startActivity(intent);//액티비티 띄우기
+                startActivityForResult(intent,request_code);//액티비티 띄우기
             }
         });
 
@@ -340,76 +406,10 @@ public class List extends Fragment {
         return view;
     }
 
-    public void load_values(List_CustomChoiceListViewAdapter adapter) {
-
-        SQLiteDatabase db = List_DB.getReadableDatabase();//SQLiteDatabase.openOrCreateDatabase("List_20_11_22.db",MODE_PRIVATE,null) ;
-        Cursor cursor = db.rawQuery(List_DB_Make.SQL_SELECT, null);
-        int RecordCount = cursor.getCount();
-
-        //if (cursor.moveToFirst()) {
-        for (int i = 0; i < RecordCount; i++) {
-
-            cursor.moveToNext();
-            // List_No (INTEGER) 값 가져오기.
-            //int List_No = cursor.getInt(0) ;
-
-            // List_Title (INTEGER) 값 가져오기.
-            String List_Title = cursor.getString(0);
-
-            // List_Term_Start (TEXT) 값 가져오기
-            String List_Term_Start = cursor.getString(1);
-
-            // List_Term_End (TEXT) 값 가져오기
-            String List_Term_End = cursor.getString(2);
-
-            // List_Time_Start (TEXT) 값 가져오기
-            String List_Time_Start = cursor.getString(3);
-
-            // List_Time_End (TEXT) 값 가져오기
-            String List_Time_End = cursor.getString(4);
-
-            // List_Level (TEXT) 값 가져오기
-            String List_Level = cursor.getString(5);
-
-            // List_Category (TEXT) 값 가져오기
-            String List_Category = cursor.getString(6);
-
-            // List_Degree_Goal (TEXT) 값 가져오기
-            String List_Detail = cursor.getString(7);
-
-            // List_Detail (TEXT) 값 가져오기
-            String List_Degree_Goal = cursor.getString(8);
-
-            float total = 0;
-
-            String strFormat = "yyyy/MM/dd";
-            Date date = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat(strFormat);
-            String strToday = sdf.format(date);
-            {
-                try {
-                    Date startDate = sdf.parse(List_Term_Start);
-                    Date endDate = sdf.parse(List_Term_End);
-                    Date today = sdf.parse(strToday);
-
-                    float diffDay = (startDate.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
-                    float nowDay = (today.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
-                    total = (nowDay / diffDay) * 100;
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            String per = (100 - (int) total) + "%";
-
-            Log.d("k2", per);
-
-            //Title, 시작기간, 끝난 기간, 디테일 , 퍼센트
-            if (total <= 100 && total >= 0) {
-                adapter.addItem(List_Title, List_Term_Start, List_Term_End, List_Detail, per);
-                db.close();
-            }
-
+    public void onActivityResult(int requestCode ,int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==request_code &&resultCode==RESULT_OK){
+            GoalData = data.getExtras().getString("goal_data");
         }
     }
 }

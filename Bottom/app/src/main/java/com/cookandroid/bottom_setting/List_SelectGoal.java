@@ -156,6 +156,10 @@ public class List_SelectGoal extends AppCompatActivity {
                 naver_list_count = Long.toString(long_naver_list_count);
             }
         }
+        else{
+
+        }
+
         //시작 날짜 클릭 시
         editstartdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -305,18 +309,25 @@ public class List_SelectGoal extends AppCompatActivity {
                         // list contents upload
                         InsertData_list insert_data_list = new InsertData_list(IP, null, getApplicationContext());
                         insert_data_list.execute(insert_final_list_id, insert_contents);
+
+                        Intent intent = new Intent(getApplication(),List.class);
+                        setResult(Activity.RESULT_OK,intent);
                     }
 
 
                     else if ((user != null)&&(FirebaseAuth.getInstance().getCurrentUser() != null)){
                         //파이어베이스로 로그인 한 경우
+                        list_term_start= editstartdate.getText().toString();
+                        list_term_end=editenddate.getText().toString();
+                        list_time_start= editstrattime.getText().toString();
+                        list_time_end=editendtime.getText().toString();
                         id=user.getEmail();
                         writeNewPost(true);
-
+                        String data=goal.getText().toString();
+                        Intent intent = new Intent(getApplication(),List.class);
+                        intent.putExtra("goal_data",data);
+                        setResult(Activity.RESULT_OK,intent);
                     }
-
-                    Intent intent = new Intent(getApplication(),List.class);
-                    setResult(Activity.RESULT_OK,intent);
 
                     db.close();
 

@@ -41,8 +41,8 @@ public class FirebasePost_data {
         result.put("title", Title);
         result.put("start_term", list_term_start);
         result.put("end_term", list_term_end);
-        result.put("start_term", list_time_start);
-        result.put("end_term", list_time_end);
+        result.put("start_time", list_time_start);
+        result.put("end_time", list_time_end);
         result.put("level", list_level);
         result.put("category", list_category);
         result.put("detail", list_detail);
