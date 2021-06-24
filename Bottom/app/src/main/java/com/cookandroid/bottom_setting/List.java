@@ -127,6 +127,10 @@ public class List extends Fragment {
                     List_ID = user_list_id.getList_ID();
                     length = user_list_id.getlength();
                 }
+                else {
+                    List_ID = null;
+                    length = 0;
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
                 List_ID = null;
@@ -208,9 +212,6 @@ public class List extends Fragment {
                 }
 
             }
-            else {
-                load_values(adapter);
-            }
         }
         ImageButton addButton = (ImageButton) view.findViewById(R.id.add);
         addButton.setOnClickListener(new Button.OnClickListener() {
@@ -243,6 +244,7 @@ public class List extends Fragment {
 
                         }
                     }
+                    find = "null";
                 }
                 // Naver Login 이외의 경우 삭제 처리
                 else {
@@ -338,78 +340,5 @@ public class List extends Fragment {
         }) ;
 
         return view;
-    }
-
-    public void load_values(List_CustomChoiceListViewAdapter adapter) {
-
-        SQLiteDatabase db = List_DB.getReadableDatabase();//SQLiteDatabase.openOrCreateDatabase("List_20_11_22.db",MODE_PRIVATE,null) ;
-        Cursor cursor = db.rawQuery(List_DB_Make.SQL_SELECT, null);
-        int RecordCount = cursor.getCount();
-
-        //if (cursor.moveToFirst()) {
-        for (int i = 0; i < RecordCount; i++) {
-
-            cursor.moveToNext();
-            // List_No (INTEGER) 값 가져오기.
-            //int List_No = cursor.getInt(0) ;
-
-            // List_Title (INTEGER) 값 가져오기.
-            String List_Title = cursor.getString(0);
-
-            // List_Term_Start (TEXT) 값 가져오기
-            String List_Term_Start = cursor.getString(1);
-
-            // List_Term_End (TEXT) 값 가져오기
-            String List_Term_End = cursor.getString(2);
-
-            // List_Time_Start (TEXT) 값 가져오기
-            String List_Time_Start = cursor.getString(3);
-
-            // List_Time_End (TEXT) 값 가져오기
-            String List_Time_End = cursor.getString(4);
-
-            // List_Level (TEXT) 값 가져오기
-            String List_Level = cursor.getString(5);
-
-            // List_Category (TEXT) 값 가져오기
-            String List_Category = cursor.getString(6);
-
-            // List_Degree_Goal (TEXT) 값 가져오기
-            String List_Detail = cursor.getString(7);
-
-            // List_Detail (TEXT) 값 가져오기
-            String List_Degree_Goal = cursor.getString(8);
-
-            float total = 0;
-
-            String strFormat = "yyyy/MM/dd";
-            Date date = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat(strFormat);
-            String strToday = sdf.format(date);
-            {
-                try {
-                    Date startDate = sdf.parse(List_Term_Start);
-                    Date endDate = sdf.parse(List_Term_End);
-                    Date today = sdf.parse(strToday);
-
-                    float diffDay = (startDate.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
-                    float nowDay = (today.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
-                    total = (nowDay / diffDay) * 100;
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            String per = (100 - (int) total) + "%";
-
-            Log.d("k2", per);
-
-            //Title, 시작기간, 끝난 기간, 디테일 , 퍼센트
-            if (total <= 100 && total >= 0) {
-                adapter.addItem(List_Title, List_Term_Start, List_Term_End, List_Detail, per);
-                db.close();
-            }
-
-        }
     }
 }

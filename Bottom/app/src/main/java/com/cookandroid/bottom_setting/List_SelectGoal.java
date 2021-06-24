@@ -237,9 +237,6 @@ public class List_SelectGoal extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"목표를 입력하지 않았습니다.",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    
-
-                    SQLiteDatabase db = List_DB.getWritableDatabase();
 
                     title = goal.getText().toString();
                     list_term_start = editstartdate.getText().toString();
@@ -263,8 +260,6 @@ public class List_SelectGoal extends AppCompatActivity {
                             "'" +   list_detail     + "', " +
                             "'" +   list_degree_goal+ "'" +
                             ")" ;
-
-                    db.execSQL(sqlInsert) ;
 
                     // JSON 생성
                     JSONObject list = new JSONObject();     // JSON 오브젝트
@@ -310,19 +305,16 @@ public class List_SelectGoal extends AppCompatActivity {
                         InsertData_list insert_data_list = new InsertData_list(IP, null, getApplicationContext());
                         insert_data_list.execute(insert_final_list_id, insert_contents);
                     }
-
-
-                    else if ((user != null)&&(FirebaseAuth.getInstance().getCurrentUser() != null)){
-                        //파이어베이스로 로그인 한 경우
-                        id=user.getEmail();
+                    //파이어베이스로 로그인 한 경우
+                    else if ((user != null)&&(FirebaseAuth.getInstance().getCurrentUser() != null)) {
+                        
+                        id = user.getEmail();
                         writeNewPost(true);
 
                     }
 
                     Intent intent = new Intent(getApplication(),List.class);
                     setResult(Activity.RESULT_OK,intent);
-
-                    db.close();
 
                     finish();
                 }
