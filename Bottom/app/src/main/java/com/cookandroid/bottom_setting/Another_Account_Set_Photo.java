@@ -40,11 +40,10 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
         });
 
         user_image = findViewById(R.id.user_image);
-
+        final String imagePath = getCacheDir() + "/" + imageName;   // 내부 저장소에 저장되어 있는 이미지 경로
         try {
-            String imagePath = getCacheDir() + "/" + imageName;   // 내부 저장소에 저장되어 있는 이미지 경로
             Bitmap bm = BitmapFactory.decodeFile(imagePath);
-            user_image.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 셋
+            user_image.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 띄우기
             Toast.makeText(getApplicationContext(), "파일 로드 성공", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "파일 로드 실패", Toast.LENGTH_SHORT).show();
@@ -52,9 +51,8 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
 
         btnSave.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Another.setPhoto(user_image.getDrawable());
+                Another.setPhoto(imagePath);
                 Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_LONG).show();
-                user_image.setImageDrawable(getResources().getDrawable(R.drawable.id));
             }
         });
     }

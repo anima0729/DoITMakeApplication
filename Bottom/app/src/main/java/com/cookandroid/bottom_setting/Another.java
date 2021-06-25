@@ -1,5 +1,7 @@
 package com.cookandroid.bottom_setting;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -113,7 +116,13 @@ public class Another extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) { }
 
-    public static void setPhoto (Drawable newProfilePhoto){ photo = newProfilePhoto; }
+    public static void setPhoto (String imagePath){
+        try {
+            Bitmap bm = BitmapFactory.decodeFile(imagePath);
+            ProfilePhoto.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 띄우기
+        } catch (Exception e) {
+        }
+    }
 
     public static void setGender (String newGender){
         gender = newGender;
