@@ -278,7 +278,6 @@ public class List_SelectGoal extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    Log.e("json", "list.json : " + list.toString());
 
                     String insert_contents = list.toString();
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

@@ -326,13 +326,31 @@ public class List extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 if (selectAllButton.getVisibility() == View.GONE) {
-                    // get item
-                    List_ListviewItem item = (List_ListviewItem) parent.getItemAtPosition(position);
 
-                    String Title = item.getGoal();
-                    Intent intent = new Intent(getActivity(), List_Detail.class);
-                    intent.putExtra("Title", Title);
-                    startActivity(intent);
+                    // Naver Login일 경우
+                    if (bundle != null) {
+                        Intent intent = new Intent(getActivity(), List_Detail.class);
+                        intent.putExtra("id", List_ID[position]);
+                        intent.putExtra("Title", Title[position]);
+                        intent.putExtra("Term_Start", List_Term_Start[position]);
+                        intent.putExtra("Term_End", List_Term_End[position]);
+                        intent.putExtra("Time_Start", List_Time_Start[position]);
+                        intent.putExtra("Time_End", List_Time_End[position]);
+                        intent.putExtra("Level", List_Level[position]);
+                        intent.putExtra("Category", List_Category[position]);
+                        intent.putExtra("Detail", List_Detail[position]);
+                        intent.putExtra("Degree_Goal", List_Degree_Goal[position]);
+                        startActivity(intent);
+                    }
+                    else {
+                        // get item
+                        List_ListviewItem item = (List_ListviewItem) parent.getItemAtPosition(position);
+                        String Title = item.getGoal();
+
+                        Intent intent = new Intent(getActivity(), List_Detail.class);
+                        intent.putExtra("Title", Title);
+                        startActivity(intent);
+                    }
 
                     // TODO : use item data.
                 }
