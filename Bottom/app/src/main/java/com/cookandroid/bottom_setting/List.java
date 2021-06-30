@@ -39,6 +39,9 @@ import static com.cookandroid.bottom_setting.MainActivity.List_DB;
 
 public class List extends Fragment {
 
+    // Fragment Refresh
+    boolean refresh;
+
     // Bundle에서 ID정보 받아오기
     String id;
     String find;
@@ -91,6 +94,7 @@ public class List extends Fragment {
     public void Refresh_Fragment() {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
+        refresh = false;
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -251,9 +255,11 @@ public class List extends Fragment {
 
             }
         }
+
         ImageButton addButton = (ImageButton) view.findViewById(R.id.add);
         addButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                refresh = true;
                 startActivity(intent);//액티비티 띄우기
             }
         });
@@ -396,5 +402,13 @@ public class List extends Fragment {
         }) ;
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (refresh) {
+            Refresh_Fragment();
+        }
     }
 }

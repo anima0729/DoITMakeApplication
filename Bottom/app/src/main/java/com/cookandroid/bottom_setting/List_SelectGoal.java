@@ -397,8 +397,8 @@ public class List_SelectGoal extends AppCompatActivity {
 
             case R.id.menu_2:
                 category.setText("학업");
-
                 break;
+
             case R.id.menu_3:
                 category.setText("직장");
                 break;
