@@ -277,8 +277,8 @@ public class List extends Fragment {
                             delete_list_id = new DeleteDataBase_List_id(IP, null, getContext());
                             delete_list = new DeleteDataBase_List(IP, null, getContext());
 
-                            delete_list_id.execute(List_ID[i]);
-                            delete_list.execute(List_ID[i]);
+                            delete_list_id.execute(List_Detail_List_ID[i]);
+                            delete_list.execute(List_Detail_List_ID[i]);
 
                         }
                     }
