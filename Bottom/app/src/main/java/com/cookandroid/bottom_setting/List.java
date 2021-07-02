@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -51,7 +52,8 @@ public class List extends Fragment {
     String start;
     String end;
     String detail;
-    String GoalData="";klkl
+    String GoalData="";
+    ArrayList<Firebase_Data_Array> data_array = new ArrayList<Firebase_Data_Array>();
 
     String ad_title;
     String ad_sd;
@@ -102,9 +104,9 @@ public class List extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list, container, false);
-
         final ListView listview ;
         final List_CustomChoiceListViewAdapter adapter;
+        final Firebase_Adapter adapter2;
         final Intent intent = new Intent(getActivity(), List_SelectGoal.class);
         // 체크박스
         boolean mClick = false;
@@ -112,13 +114,17 @@ public class List extends Fragment {
         // Adapter 생성
         adapter = new List_CustomChoiceListViewAdapter() ;
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-        String uid=user.getUid();
+        final String uid=user.getUid();
 
 
         // 리스트뷰 참조 및 Adapter달기
         listview = (ListView) view.findViewById(R.id.listview1);
         listview.setAdapter(adapter);
 
+
+        adapter2=new Firebase_Adapter(getContext(),data_array);
+        ListView listview2 = (ListView) view.findViewById(R.id.listview1);
+        listview2.setAdapter(adapter2);
 
         bundle = getArguments();
 
@@ -229,55 +235,37 @@ public class List extends Fragment {
             }
         }
         else{
+
             if (GoalData.equals("")){
             }
             else{
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(uid).child("Data").child(GoalData);
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(uid).child("Data");
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        adapter2.clear();
                         for(DataSnapshot DS : snapshot.getChildren()){
+                            String key = DS.getKey();
                             Firebase_Data FD = snapshot.getValue(Firebase_Data.class);
-                            ad_title=FD.title;
+                            ad_title=key; //goal 가져오기
                             ad_sd=FD.start_term;
                             ad_ed=FD.end_term;
-                            //ad_st=FD.
                             ad_detail=FD.detail;
 
-                        }
-
-                        String strFormat = "yyyy/MM/dd";
-                        Date date = new Date();
-                        SimpleDateFormat sdf = new SimpleDateFormat(strFormat);
-                        String strToday = sdf.format(date);
-                        {
-                            try {
-                                Date startDate = sdf.parse(ad_sd);
-                                Date endDate = sdf.parse(ad_ed);
-                                Date today = sdf.parse(strToday);
-
-                                float diffDay = (startDate.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
-                                float nowDay = (today.getTime() - endDate.getTime()) / (24 * 60 * 60 * 1000) * -1;
-                                tt = (nowDay / diffDay) * 100;
-                            } catch (ParseException e) {
-                                e.printStackTrace();
+                            Firebase_Data_Array DA = new Firebase_Data_Array(ad_detail,ad_ed,ad_per,ad_sd,ad_title);
+                            if (tt <= 100 && tt >= 0) {
+                                data_array.add(DA);
                             }
                         }
-                        ad_per = (100 - (int) tt) + "%";
+                        adapter2.notifyDataSetChanged();
                     }
-
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
-
-                if (tt <= 100 && tt >= 0) {
-                    adapter.addItem(ad_title,ad_sd,ad_ed,ad_detail,ad_per);
-                }
-
             }
         }
+
         ImageButton addButton = (ImageButton) view.findViewById(R.id.add);
         addButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
