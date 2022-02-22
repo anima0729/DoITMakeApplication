@@ -4,13 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +38,9 @@ public class Another extends Fragment implements View.OnClickListener{
     public static String nickname = null;
     public static String gender = null;
 
+    // 수정필요(번들 이용)
+    public static String imagePath = null;  // 내부 저장소에 저장되어 있는 이미지 경로
+
     public static Another newInstance() {
         return new Another();
     }
@@ -47,7 +48,6 @@ public class Another extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -101,7 +101,11 @@ public class Another extends Fragment implements View.OnClickListener{
 
         // ProfilePhoto에 Profile 정보 표시
         ProfilePhoto = fv.findViewById(R.id.imageView);
-        ProfilePhoto.setImageDrawable(photo);
+        if (imagePath == null) {
+            ProfilePhoto.setImageDrawable(photo);
+        }
+        else setPhoto(imagePath);
+
 
         // ProfileBox에 Profile 정보 표시
         ProfileBox = fv.findViewById(R.id.textView);
@@ -117,8 +121,11 @@ public class Another extends Fragment implements View.OnClickListener{
         try {
             Bitmap bm = BitmapFactory.decodeFile(imagePath);
             ProfilePhoto.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 띄우기
-        } catch (Exception e) {
-        }
+        } catch (Exception e) { }
+    }
+
+    public static void setImagePath (String newImagePath){
+        imagePath = newImagePath;
     }
 
     public static void setGender (String newGender){

@@ -51,7 +51,7 @@ public class Another_Account_Set_Photo extends AppCompatActivity {
 
         btnSave.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Another.setPhoto(imagePath);
+                Another.setImagePath(imagePath);
                 Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_LONG).show();
             }
         });

@@ -59,11 +59,6 @@
     <string name="Save">저장</string>
     <string name="Cancel">취소</string>
 
-    <!--Naver Login-->
-    <string name="naver_client_id">S1lQJB5lwu6g49kxQ6FE</string>
-    <string name="naver_client_secret">GsDryj6kDC</string>
-    <string name="naver_client_name">Project</string>
-
     <string name="naver_google">Or</string>
 
     <!--Web Server-->
