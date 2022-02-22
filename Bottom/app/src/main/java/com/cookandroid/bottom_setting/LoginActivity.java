@@ -141,9 +141,9 @@ public class LoginActivity extends AppCompatActivity {
                 mOAuthLoginModule = OAuthLogin.getInstance();
                 mOAuthLoginModule.init(
                         mContext
-                        ,getString(R.string.naver_client_id)
-                        ,getString(R.string.naver_client_secret)
-                        ,getString(R.string.naver_client_name)
+                        ,BuildConfig.NAVER_CLIENT_ID
+                        ,BuildConfig.NAVER_CLIENT_SECRET
+                        ,BuildConfig.NAVER_CLIENT_NAME
                         //,OAUTH_CALLBACK_INTENT
                         // SDK 4.1.4 버전부터는 OAUTH_CALLBACK_INTENT변수를 사용하지 않습니다.
                 );
